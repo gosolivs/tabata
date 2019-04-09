@@ -5,28 +5,39 @@
 
 			<div class="settings__main">
 				<div class="settings__field">
-					<Field v-model="prepare" label="Подготовка" />
+					<Field :value="prepare" @input="updatePrepare" label="Подготовка" />
 				</div>
 				<div class="settings__field">
-					<Field v-model="rest" label="Отдых" />
+					<Field :value="rest" @input="updateRest" label="Отдых" />
 				</div>
 				<div class="settings__field">
-					<Field v-model="work" label="Работа" />
+					<Field :value="work" @input="updateWork" label="Работа" />
 				</div>
 				<div class="settings__field">
-					<Field v-model="cycles" label="Количество раундов" />
+					<Field
+						:value="cycles"
+						@input="updateCycles"
+						label="Количество раундов"
+					/>
 				</div>
 			</div>
 
 			<div class="settings__controls">
-				<Button isGray :onClick="cancel">Отмена</Button>
-				<Button :onClick="save">Сохранить</Button>
+				<Button :onClick="save">Закрыть</Button>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+import {
+	CHANGE_PREPARE,
+	CHANGE_REST,
+	CHANGE_WORK,
+	CHANGE_CYCLES,
+} from "@/store/actions.type";
+
 import router from "@/router";
 import routeName from "@/router/routeName";
 
@@ -41,20 +52,34 @@ export default {
 		Field,
 	},
 
-	data: () => ({
-		prepare: 10,
-		rest: 30,
-		work: 30,
-		cycles: 8,
-	}),
+	computed: {
+		...mapState({
+			prepare: state => state.prepare,
+			rest: state => state.rest,
+			work: state => state.work,
+			cycles: state => state.cycles,
+		}),
+	},
 
 	methods: {
-		cancel() {
+		save() {
 			router.push({ name: routeName.home });
 		},
 
-		save() {
-			router.push({ name: routeName.home });
+		updatePrepare(value) {
+			this.$store.commit(CHANGE_PREPARE, value);
+		},
+
+		updateRest(value) {
+			this.$store.commit(CHANGE_REST, value);
+		},
+
+		updateWork(value) {
+			this.$store.commit(CHANGE_WORK, value);
+		},
+
+		updateCycles(value) {
+			this.$store.commit(CHANGE_CYCLES, value);
 		},
 	},
 };
@@ -95,13 +120,9 @@ export default {
 }
 
 .settings__controls {
-	display: flex;
-	align-items: flex-start;
-	margin-left: -20px;
 }
 
 .settings__controls > * {
-	margin-left: 20px;
-	flex: 1 1 50%;
+	width: 100%;
 }
 </style>
