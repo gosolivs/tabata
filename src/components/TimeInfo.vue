@@ -1,14 +1,20 @@
 <template>
 	<div class="info">
 		<ul class="info__list">
-			<li class="info__item">Подготовка: {{ prepare }} сек.</li>
-			<li class="info__item">Отдых: {{ rest }} сек.</li>
-			<li class="info__item">Работа: {{ work }} сек.</li>
-			<li class="info__item">Кругов: {{ cycles }}</li>
+			<li class="info__item">
+				{{ $t("states.prepare") }}: {{ prepare }} {{ $t("time_unit") }}
+			</li>
+			<li class="info__item">
+				{{ $t("states.rest") }}: {{ rest }} {{ $t("time_unit") }}
+			</li>
+			<li class="info__item">
+				{{ $t("states.work") }}: {{ work }} {{ $t("time_unit") }}
+			</li>
+			<li class="info__item">{{ $t("settings.cycles") }}: {{ cycles }}</li>
 		</ul>
 
 		<div class="info__total">
-			Общее время:
+			{{ $t("home.total_time") }}:
 			<div class="info__duration">{{ keepTime }}</div>
 		</div>
 	</div>

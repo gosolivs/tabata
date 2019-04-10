@@ -1,0 +1,25 @@
+{
+	"home": {
+		"total_time": "Общее время",
+		"cycles": "Раунды"
+	},
+	"settings": {
+		"title": "Настройки",
+		"cycles": "Кругов"
+	},
+	"states": {
+		"prepare": "Подготовка",
+		"rest": "Отдых",
+		"work": "Работа",
+		"pause": "Пауза"
+	},
+	"actions": {
+		"close": "Закрыть",
+		"start": "Старт",
+		"pause": "Пауза",
+		"stop": "Стоп",
+		"settings": "Настройки",
+		"resume": "Продолжить"
+	},
+	"time_unit": "сек."
+}

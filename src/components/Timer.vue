@@ -1,6 +1,6 @@
 <template>
 	<div class="timer">
-		<div class="timer__title">{{ title }}</div>
+		<div class="timer__title">{{ $t(title) }}</div>
 		<div class="timer__remained">{{ keepTime }}</div>
 		<Cycles :keep="keepCycles" :total="cycles" />
 	</div>
@@ -42,16 +42,16 @@ export default {
 		title: ({ paused, worked, rested }) => {
 			switch (true) {
 				case paused:
-					return "Пауза";
+					return "states.pause";
 
 				case worked:
-					return "Работа";
+					return "states.work";
 
 				case rested:
-					return "Отдых";
+					return "states.rest";
 
 				default:
-					return "Поготовка";
+					return "states.prepare";
 			}
 		},
 	},

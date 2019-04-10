@@ -20,15 +20,19 @@
 			/>
 
 			<div class="home__controls" v-if="!started">
-				<Button :onClick="clickSettings">Настройки</Button>
-				<Button :onClick="clickStart">Старт</Button>
+				<Button :onClick="clickSettings">{{ $t("actions.settings") }}</Button>
+				<Button :onClick="clickStart">{{ $t("actions.start") }}</Button>
 			</div>
 
 			<div class="home__controls" v-if="started">
-				<Button :onClick="clickTogglePause" isGray v-if="!paused">Пауза</Button>
-				<Button :onClick="clickTogglePause" v-if="paused">Продолжить</Button>
+				<Button :onClick="clickTogglePause" isGray v-if="!paused">{{
+					$t("actions.pause")
+				}}</Button>
+				<Button :onClick="clickTogglePause" v-if="paused">{{
+					$t("actions.resume")
+				}}</Button>
 
-				<Button :onClick="clickStop">Стоп</Button>
+				<Button :onClick="clickStop">{{ $t("actions.stop") }}</Button>
 			</div>
 		</div>
 	</div>

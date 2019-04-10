@@ -1,6 +1,6 @@
 <template>
 	<div class="cycles">
-		<div class="cycles__title">Раунды:</div>
+		<div class="cycles__title">{{ $t("home.cycles") }}:</div>
 
 		<span class="cycles__keep">{{ keep }}</span>
 		<span class="cycles__total">/{{ total }}</span>

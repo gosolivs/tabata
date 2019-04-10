@@ -1,36 +1,39 @@
 <template>
 	<div class="settings">
 		<div class="settings__wrap">
-			<h1 class="settings__title">Настройки</h1>
+			<h1 class="settings__title">{{ $t("settings.title") }}</h1>
 
 			<div class="settings__main">
 				<div class="settings__field">
 					<Field :value="prepare" @input="updatePrepare">
-						Подготовка<span class="settings__note">, сек</span>
+						{{ $t("states.prepare")
+						}}<span class="settings__note">, {{ $t("time_unit") }}</span>
 					</Field>
 				</div>
 
 				<div class="settings__field">
 					<Field :value="rest" @input="updateRest">
-						Отдых<span class="settings__note">, сек</span>
+						{{ $t("states.rest")
+						}}<span class="settings__note">, {{ $t("time_unit") }}</span>
 					</Field>
 				</div>
 
 				<div class="settings__field">
 					<Field :value="work" @input="updateWork">
-						Работа<span class="settings__note">, сек</span>
+						{{ $t("states.work")
+						}}<span class="settings__note">, {{ $t("time_unit") }}</span>
 					</Field>
 				</div>
 
 				<div class="settings__field">
 					<Field :value="cycles" @input="updateCycles">
-						Количество раундов
+						{{ $t("settings.cycles") }}
 					</Field>
 				</div>
 			</div>
 
 			<div class="settings__controls">
-				<Button :onClick="save">Закрыть</Button>
+				<Button :onClick="save">{{ $t("actions.close") }}</Button>
 			</div>
 		</div>
 	</div>
