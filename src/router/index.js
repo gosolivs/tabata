@@ -3,6 +3,9 @@ import VueRouter from "vue-router";
 
 import routeName from "./routeName";
 
+import Home from "@/views/Home";
+import Settings from "@/views/Settings";
+
 Vue.use(VueRouter);
 
 const router = new VueRouter({
@@ -12,12 +15,12 @@ const router = new VueRouter({
 		{
 			path: "/",
 			name: routeName.home,
-			component: () => import("@/views/Home"),
+			component: Home,
 		},
 		{
 			path: "/settings/",
 			name: routeName.settings,
-			component: () => import("@/views/Settings"),
+			component: Settings,
 		},
 	],
 });
