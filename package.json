@@ -8,8 +8,8 @@
     "lint": "vue-cli-service lint",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
     "lint:write": "prettier --write src/**/*.{js,vue}",
-    "test:unit": "vue-cli-service test:unit",
-		"spell": "yaspeller src/locales/*.json"
+    "spell": "yaspeller src/locales/*.json",
+    "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
     "core-js": "^2.6.5",
@@ -24,6 +24,8 @@
     "@vue/cli-plugin-eslint": "^3.5.0",
     "@vue/cli-plugin-unit-jest": "^3.5.3",
     "@vue/cli-service": "^3.5.0",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.7.1",
     "eslint": "^5.8.0",
@@ -41,7 +43,8 @@
   "eslintConfig": {
     "root": true,
     "env": {
-      "node": true
+      "node": true,
+			"jest": true
     },
     "extends": [
       "plugin:vue/essential",
@@ -51,7 +54,7 @@
     "parserOptions": {
       "parser": "babel-eslint"
     }
-  },
+	},
   "postcss": {
     "plugins": {
       "postcss-pxtorem": {
@@ -77,7 +80,8 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+			"pre-push": "yarn run test:unit"
     }
   },
   "lint-staged": {
@@ -86,9 +90,9 @@
       "vue-cli-service lint",
       "git add"
     ],
-		"src/locales/*.json": [
-			"yarn spell",
-			"git add"
-		]
+    "src/locales/*.json": [
+      "yarn spell",
+      "git add"
+    ]
   }
 }

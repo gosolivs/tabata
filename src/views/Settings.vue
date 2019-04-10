@@ -51,8 +51,8 @@ import {
 import router from "@/router";
 import routeName from "@/router/routeName";
 
-import Button from "@/components/Button";
-import Field from "@/components/Field";
+import Button from "@/components/Button/Button";
+import Field from "@/components/Field/Field";
 
 export default {
 	name: "Settings",

@@ -9,7 +9,7 @@
 <script>
 import { formatTime } from "@/utils/times";
 
-import Cycles from "@/components/Cycles";
+import Cycles from "@/components/Cycles/Cycles";
 
 export default {
 	name: "Timer",

@@ -44,9 +44,9 @@ import { mapState } from "vuex";
 import router from "@/router";
 import routeName from "@/router/routeName";
 
-import Button from "@/components/Button";
-import TimeInfo from "@/components/TimeInfo";
-import Timer from "@/components/Timer";
+import Button from "@/components/Button/Button";
+import TimeInfo from "@/components/TimeInfo/TimeInfo";
+import Timer from "@/components/Timer/Timer";
 
 let intervalID;
 
