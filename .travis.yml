@@ -9,6 +9,7 @@ branches:
     - master
 after_success:
   - yarn run build
+  - bash <(curl -s https://codecov.io/bash)
 deploy:
   provider: pages
   skip_cleanup: true
