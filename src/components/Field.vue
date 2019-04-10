@@ -1,6 +1,6 @@
 <template>
 	<label class="field">
-		<span class="field__label">{{ label }}</span>
+		<span class="field__label"><slot /></span>
 		<InputNumber
 			:min="1"
 			:max="999"
@@ -31,10 +31,6 @@ export default {
 	},
 
 	props: {
-		label: {
-			type: String,
-			required: true,
-		},
 		value: {
 			required: true,
 		},

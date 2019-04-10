@@ -5,20 +5,27 @@
 
 			<div class="settings__main">
 				<div class="settings__field">
-					<Field :value="prepare" @input="updatePrepare" label="Подготовка" />
+					<Field :value="prepare" @input="updatePrepare">
+						Подготовка<span class="settings__note">, сек</span>
+					</Field>
 				</div>
+
 				<div class="settings__field">
-					<Field :value="rest" @input="updateRest" label="Отдых" />
+					<Field :value="rest" @input="updateRest">
+						Отдых<span class="settings__note">, сек</span>
+					</Field>
 				</div>
+
 				<div class="settings__field">
-					<Field :value="work" @input="updateWork" label="Работа" />
+					<Field :value="work" @input="updateWork">
+						Работа<span class="settings__note">, сек</span>
+					</Field>
 				</div>
+
 				<div class="settings__field">
-					<Field
-						:value="cycles"
-						@input="updateCycles"
-						label="Количество раундов"
-					/>
+					<Field :value="cycles" @input="updateCycles">
+						Количество раундов
+					</Field>
 				</div>
 			</div>
 
@@ -118,6 +125,11 @@ export default {
 	flex: 1 1 auto;
 	width: calc(50% - 20px);
 	min-width: 180px;
+}
+
+.settings__note {
+	color: #333;
+	font-size: 0.9em;
 }
 
 .settings__controls {
