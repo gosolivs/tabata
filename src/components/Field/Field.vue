@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import InputNumber from "vue-input-number";
+import InputNumber from "vue-input-number/index.vue";
 
 export default {
 	name: "Field",
