@@ -1,29 +1,10 @@
-# tabata
+# Tabata Timer
 
-## Project setup
-```
-yarn install
-```
+A simple [Tabata timer](https://jackysee.github.io/tabata-timer/) in Vue.
+Config stored in localStorge.
 
-### Compiles and hot-reloads for development
+Start developing running the following code
 ```
-yarn run serve
+npm install
+npm run serve
 ```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
