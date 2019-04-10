@@ -7,11 +7,6 @@ notifications:
 branches:
   only:
     - master
-install:
-  - yarn
-script:
-  - yarn run test
-  - yarn run build
 deploy:
   provider: pages
   skip_cleanup: true
