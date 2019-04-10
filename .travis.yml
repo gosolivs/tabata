@@ -1,20 +1,20 @@
 language: node_js
 node_js:
-	- "11"
+  - "11"
 notifications:
-	email:
-		on_failure: change
+  email:
+    on_failure: change
 branches:
-	only:
-		- master
+  only:
+    - master
 before_script:
-	- npm install
+  - npm install
 script:
-	- npm run build
+  - npm run build
 deploy:
-	provider: pages
-	skip_cleanup: true
-	github_token: $GITHUB_TOKEN
-	local_dir: dist
-	on:
-		branch: master
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: dist
+  on:
+    branch: master
