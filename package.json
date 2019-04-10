@@ -8,7 +8,8 @@
     "lint": "vue-cli-service lint",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
     "lint:write": "prettier --write src/**/*.{js,vue}",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+		"spell": "yaspeller src/locales/*.json"
   },
   "dependencies": {
     "core-js": "^2.6.5",
@@ -34,7 +35,8 @@
     "postcss-pxtorem": "^4.0.1",
     "prettier": "^1.16.4",
     "vue-cli-plugin-i18n": "^0.6.0",
-    "vue-template-compiler": "^2.5.21"
+    "vue-template-compiler": "^2.5.21",
+    "yaspeller": "^5.0.1"
   },
   "eslintConfig": {
     "root": true,
@@ -83,6 +85,10 @@
       "yarn run lint:write",
       "vue-cli-service lint",
       "git add"
-    ]
+    ],
+		"src/locales/*.json": [
+			"yarn spell",
+			"git add"
+		]
   }
 }
