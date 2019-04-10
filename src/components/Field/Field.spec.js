@@ -19,4 +19,15 @@ describe("Field.vue", () => {
 
 		expect(wrapper.find(".field__label").text()).toEqual(label);
 	});
+
+	it("onChange test", () => {
+		const text = "hello";
+
+		const wrapper = shallowMount(Field, {
+			propsData: defaultProps,
+		});
+
+		wrapper.vm.$emit("input", text);
+		expect(wrapper.emitted().input).toEqual([[text]]);
+	});
 });
