@@ -71,4 +71,20 @@ export default {
 	font-size: 7rem;
 	line-height: 1;
 }
+
+@media (max-width: 450px) {
+	.timer {
+		flex: 1 1 auto;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+}
+
+@media (max-width: 400px) {
+	.timer__remained {
+		font-size: 5rem;
+	}
+}
 </style>

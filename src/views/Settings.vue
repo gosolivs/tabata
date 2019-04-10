@@ -117,12 +117,22 @@ export default {
 	margin: 0 0 20px 20px;
 	flex: 1 1 auto;
 	width: calc(50% - 20px);
+	min-width: 180px;
 }
 
 .settings__controls {
+	margin-top: auto;
 }
 
 .settings__controls > * {
 	width: 100%;
+}
+
+@media (max-width: 450px) {
+	.settings__wrap {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+	}
 }
 </style>

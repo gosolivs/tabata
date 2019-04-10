@@ -172,7 +172,7 @@ export default {
 .home__controls {
 	display: flex;
 	flex-wrap: wrap;
-	margin-left: -20px;
+	margin: 0 0 -20px -20px;
 }
 
 .home__controls > * {
@@ -180,5 +180,14 @@ export default {
 	flex: 1 0 auto;
 	width: calc(50% - 20px);
 	min-width: 150px;
+}
+
+@media (max-width: 450px) {
+	.home__wrap {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
 }
 </style>

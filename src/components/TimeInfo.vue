@@ -70,4 +70,14 @@ export default {
 	line-height: 1;
 	font-size: 5rem;
 }
+
+@media (max-width: 450px) {
+	.info {
+		flex: 1 1 auto;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+}
 </style>
