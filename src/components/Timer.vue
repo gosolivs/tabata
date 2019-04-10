@@ -1,14 +1,7 @@
 <template>
 	<div class="timer">
-		<div class="timer__title" v-if="!paused && !rested && !worked">
-			Поготовка
-		</div>
-		<div class="timer__title" v-if="!paused && rested">Отдых</div>
-		<div class="timer__title" v-if="!paused && worked">Работа</div>
-		<div class="timer__title" v-if="paused">Пауза</div>
-
+		<div class="timer__title">{{ title }}</div>
 		<div class="timer__remained">{{ keepTime }}</div>
-
 		<Cycles :keep="keepCycles" :total="cycles" />
 	</div>
 </template>
@@ -46,6 +39,21 @@ export default {
 	computed: {
 		keepCycles: ({ remainedCycles, cycles }) => cycles - remainedCycles,
 		keepTime: ({ remained }) => formatTime(remained),
+		title: ({ paused, worked, rested }) => {
+			switch (true) {
+				case paused:
+					return "Пауза";
+
+				case worked:
+					return "Работа";
+
+				case rested:
+					return "Отдых";
+
+				default:
+					return "Поготовка";
+			}
+		},
 	},
 };
 </script>
