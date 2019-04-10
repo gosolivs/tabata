@@ -7,6 +7,7 @@ Vue.use(VueRouter);
 
 const router = new VueRouter({
 	mode: "history",
+	base: process.env.NODE_ENV === "production" ? "/tabata/" : "/",
 	routes: [
 		{
 			path: "/",
