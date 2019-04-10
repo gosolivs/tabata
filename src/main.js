@@ -7,6 +7,8 @@ import router from "./router";
 import App from "./App.vue";
 import i18n from "./i18n";
 
+import "./filters";
+
 Vue.config.productionTip = false;
 
 new Vue({

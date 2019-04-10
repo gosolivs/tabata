@@ -1,14 +1,12 @@
 <template>
 	<div class="timer">
 		<div class="timer__title">{{ $t(title) }}</div>
-		<div class="timer__remained">{{ keepTime }}</div>
+		<div class="timer__remained">{{ remained | formatTime }}</div>
 		<Cycles :keep="keepCycles" :total="cycles" />
 	</div>
 </template>
 
 <script>
-import { formatTime } from "@/utils/times";
-
 import Cycles from "@/components/Cycles/Cycles";
 
 export default {
@@ -38,7 +36,6 @@ export default {
 
 	computed: {
 		keepCycles: ({ remainedCycles, cycles }) => cycles - remainedCycles,
-		keepTime: ({ remained }) => formatTime(remained),
 		title: ({ paused, worked, rested }) => {
 			switch (true) {
 				case paused:

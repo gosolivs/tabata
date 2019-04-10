@@ -1,4 +1,4 @@
-import { formatTime } from "@/utils/times";
+import { formatTime } from "@/filters/times/times";
 
 describe("times.js", () => {
 	it("0 seconds", () => {

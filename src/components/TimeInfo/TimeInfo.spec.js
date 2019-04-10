@@ -1,7 +1,7 @@
 import { shallowMount } from "@vue/test-utils";
 
 import TimeInfo from "@/components/TimeInfo/TimeInfo";
-import { formatTime } from "@/utils/times";
+import { formatTime } from "@/filters/times/times";
 
 const defaultProps = {
 	prepare: 2,

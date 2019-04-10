@@ -1,7 +1,7 @@
 import { shallowMount } from "@vue/test-utils";
 
 import Timer from "@/components/Timer/Timer";
-import { formatTime } from "@/utils/times";
+import { formatTime } from "@/filters/times/times";
 
 const defaultProps = {
 	remained: 20,
