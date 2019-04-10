@@ -7,7 +7,7 @@ notifications:
 branches:
   only:
     - master
-after_success:
+after_script:
   - yarn run build
 deploy:
   provider: pages
