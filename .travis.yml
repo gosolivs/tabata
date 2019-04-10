@@ -7,10 +7,11 @@ notifications:
 branches:
   only:
     - master
-before_script:
-  - npm install
+install:
+  - yarn
 script:
-  - npm run build
+  - yarn run test
+  - yarn run build
 deploy:
   provider: pages
   skip_cleanup: true
