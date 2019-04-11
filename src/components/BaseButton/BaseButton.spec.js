@@ -1,11 +1,11 @@
 import { shallowMount } from "@vue/test-utils";
 
-import Button from "@/components/Button/Button.vue";
+import BaseButton from "@/components/BaseButton/BaseButton.vue";
 
-describe("Button.vue", () => {
+describe("BaseButton.vue", () => {
 	it("render with text", () => {
 		const text = "message";
-		const wrapper = shallowMount(Button, {
+		const wrapper = shallowMount(BaseButton, {
 			propsData: {
 				onClick: () => {},
 			},
@@ -18,7 +18,7 @@ describe("Button.vue", () => {
 	});
 
 	it("simple render", () => {
-		const wrapper = shallowMount(Button, {
+		const wrapper = shallowMount(BaseButton, {
 			propsData: {
 				onClick: () => {},
 			},
@@ -28,7 +28,7 @@ describe("Button.vue", () => {
 	});
 
 	it("render gray button", () => {
-		const wrapper = shallowMount(Button, {
+		const wrapper = shallowMount(BaseButton, {
 			propsData: {
 				isGray: true,
 				onClick: () => {},

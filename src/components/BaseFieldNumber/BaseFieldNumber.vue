@@ -1,7 +1,7 @@
 <template>
 	<label class="field">
 		<span class="field__label"><slot /></span>
-		<InputNumber
+		<input-number
 			:min="1"
 			:max="999"
 			:step="1"
@@ -18,7 +18,7 @@
 import InputNumber from "vue-input-number/index.vue";
 
 export default {
-	name: "Field",
+	name: "BaseFieldNumber",
 
 	components: {
 		InputNumber,

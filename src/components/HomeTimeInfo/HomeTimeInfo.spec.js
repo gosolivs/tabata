@@ -1,6 +1,6 @@
 import { shallowMount } from "@vue/test-utils";
 
-import TimeInfo from "@/components/TimeInfo/TimeInfo";
+import HomeTimeInfo from "@/components/HomeTimeInfo/HomeTimeInfo";
 import { formatTime } from "@/filters/times/times";
 
 const defaultProps = {
@@ -10,9 +10,9 @@ const defaultProps = {
 	cycles: 8,
 };
 
-describe("TimeInfo.vue", () => {
+describe("HomeTimeInfo.vue", () => {
 	it("props render", () => {
-		const wrapper = shallowMount(TimeInfo, {
+		const wrapper = shallowMount(HomeTimeInfo, {
 			propsData: defaultProps,
 			mocks: {
 				$t: value => value,
@@ -31,7 +31,7 @@ describe("TimeInfo.vue", () => {
 		const { prepare, rest, work, cycles } = defaultProps;
 		const totalTime = prepare + rest * cycles + work * cycles;
 
-		const wrapper = shallowMount(TimeInfo, {
+		const wrapper = shallowMount(HomeTimeInfo, {
 			propsData: defaultProps,
 			mocks: {
 				$t() {},

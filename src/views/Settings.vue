@@ -5,35 +5,35 @@
 
 			<div class="settings__main">
 				<div class="settings__field">
-					<Field :value="prepare" @input="updatePrepare">
+					<base-field-number :value="prepare" @input="updatePrepare">
 						{{ $t("states.prepare")
 						}}<span class="settings__note">, {{ $t("time_unit") }}</span>
-					</Field>
+					</base-field-number>
 				</div>
 
 				<div class="settings__field">
-					<Field :value="rest" @input="updateRest">
+					<base-field-number :value="rest" @input="updateRest">
 						{{ $t("states.rest")
 						}}<span class="settings__note">, {{ $t("time_unit") }}</span>
-					</Field>
+					</base-field-number>
 				</div>
 
 				<div class="settings__field">
-					<Field :value="work" @input="updateWork">
+					<base-field-number :value="work" @input="updateWork">
 						{{ $t("states.work")
 						}}<span class="settings__note">, {{ $t("time_unit") }}</span>
-					</Field>
+					</base-field-number>
 				</div>
 
 				<div class="settings__field">
-					<Field :value="cycles" @input="updateCycles">
+					<base-field-number :value="cycles" @input="updateCycles">
 						{{ $t("settings.cycles") }}
-					</Field>
+					</base-field-number>
 				</div>
 			</div>
 
 			<div class="settings__controls">
-				<Button :onClick="save">{{ $t("actions.close") }}</Button>
+				<base-button :onClick="save">{{ $t("actions.close") }}</base-button>
 			</div>
 		</div>
 	</div>
@@ -51,15 +51,15 @@ import {
 import router from "@/router";
 import routeName from "@/router/routeName";
 
-import Button from "@/components/Button/Button";
-import Field from "@/components/Field/Field";
+import BaseButton from "@/components/BaseButton/BaseButton";
+import BaseFieldNumber from "@/components/BaseFieldNumber/BaseFieldNumber";
 
 export default {
 	name: "Settings",
 
 	components: {
-		Button,
-		Field,
+		BaseButton,
+		BaseFieldNumber,
 	},
 
 	computed: {

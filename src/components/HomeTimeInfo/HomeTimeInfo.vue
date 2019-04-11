@@ -22,7 +22,7 @@
 
 <script>
 export default {
-	name: "TimeInfo",
+	name: "HomeTimeInfo",
 
 	props: {
 		prepare: {

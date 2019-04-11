@@ -1,15 +1,15 @@
 import { shallowMount } from "@vue/test-utils";
 
-import Cycles from "@/components/Cycles/Cycles";
+import HomeTimerCycles from "@/components/HomeTimerCycles/HomeTimerCycles";
 
-describe("Cycles.vue", () => {
+describe("HomeTimerCycles.vue", () => {
 	it("simple render", () => {
 		const props = {
 			keep: 2,
 			total: 30,
 		};
 
-		const wrapper = shallowMount(Cycles, {
+		const wrapper = shallowMount(HomeTimerCycles, {
 			propsData: props,
 			mocks: {
 				$t() {},

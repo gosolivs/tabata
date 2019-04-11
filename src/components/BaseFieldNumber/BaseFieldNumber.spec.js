@@ -1,17 +1,17 @@
 import { shallowMount } from "@vue/test-utils";
 
-import Field from "@/components/Field/Field";
+import BaseFieldNumber from "@/components/BaseFieldNumber/BaseFieldNumber";
 import InputNumber from "vue-input-number/index.vue";
 
 const defaultProps = {
 	value: 10,
 };
 
-describe("Field.vue", () => {
+describe("BaseFieldNumber.vue", () => {
 	it("label render", () => {
 		const label = "text";
 
-		const wrapper = shallowMount(Field, {
+		const wrapper = shallowMount(BaseFieldNumber, {
 			propsData: defaultProps,
 			slots: {
 				default: label,
@@ -24,7 +24,7 @@ describe("Field.vue", () => {
 	it("onChange test", () => {
 		const text = "hello";
 
-		const wrapper = shallowMount(Field, {
+		const wrapper = shallowMount(BaseFieldNumber, {
 			propsData: defaultProps,
 		}).find(InputNumber);
 

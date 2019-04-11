@@ -1,6 +1,6 @@
 import { shallowMount } from "@vue/test-utils";
 
-import Timer from "@/components/Timer/Timer";
+import HomeTimer from "@/components/HomeTimer/HomeTimer";
 import { formatTime } from "@/filters/times/times";
 
 const defaultProps = {
@@ -13,9 +13,9 @@ const mocks = {
 	$t: value => value,
 };
 
-describe("Timer.vue", () => {
+describe("HomeTimer.vue", () => {
 	it("props render", () => {
-		const wrapper = shallowMount(Timer, {
+		const wrapper = shallowMount(HomeTimer, {
 			propsData: defaultProps,
 			mocks,
 		});
@@ -25,7 +25,7 @@ describe("Timer.vue", () => {
 	});
 
 	it("paused state", () => {
-		const wrapper = shallowMount(Timer, {
+		const wrapper = shallowMount(HomeTimer, {
 			propsData: {
 				...defaultProps,
 				paused: true,
@@ -37,7 +37,7 @@ describe("Timer.vue", () => {
 	});
 
 	it("rest state", () => {
-		const wrapper = shallowMount(Timer, {
+		const wrapper = shallowMount(HomeTimer, {
 			propsData: {
 				...defaultProps,
 				rested: true,
@@ -49,7 +49,7 @@ describe("Timer.vue", () => {
 	});
 
 	it("worked state", () => {
-		const wrapper = shallowMount(Timer, {
+		const wrapper = shallowMount(HomeTimer, {
 			propsData: {
 				...defaultProps,
 				worked: true,
@@ -61,7 +61,7 @@ describe("Timer.vue", () => {
 	});
 
 	it("default state", () => {
-		const wrapper = shallowMount(Timer, {
+		const wrapper = shallowMount(HomeTimer, {
 			propsData: defaultProps,
 			mocks,
 		});

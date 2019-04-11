@@ -1,7 +1,7 @@
 <template>
 	<div :class="rootClassName">
 		<div class="home__wrap">
-			<TimeInfo
+			<home-time-info
 				v-if="!started"
 				:prepare="prepare"
 				:rest="rest"
@@ -9,7 +9,7 @@
 				:cycles="cycles"
 			/>
 
-			<Timer
+			<home-timer
 				v-if="started"
 				:remained="remained"
 				:remainedCycles="remainedCycles"
@@ -20,19 +20,23 @@
 			/>
 
 			<div class="home__controls" v-if="!started">
-				<Button :onClick="clickSettings">{{ $t("actions.settings") }}</Button>
-				<Button :onClick="clickStart">{{ $t("actions.start") }}</Button>
+				<base-button :onClick="clickSettings">{{
+					$t("actions.settings")
+				}}</base-button>
+				<base-button :onClick="clickStart">{{
+					$t("actions.start")
+				}}</base-button>
 			</div>
 
 			<div class="home__controls" v-if="started">
-				<Button :onClick="clickTogglePause" isGray v-if="!paused">{{
-					$t("actions.pause")
-				}}</Button>
-				<Button :onClick="clickTogglePause" v-if="paused">{{
-					$t("actions.resume")
-				}}</Button>
+				<base-button :onClick="clickTogglePause" isGray v-if="!paused">
+					{{ $t("actions.pause") }}
+				</base-button>
+				<base-button :onClick="clickTogglePause" v-if="paused">
+					{{ $t("actions.resume") }}
+				</base-button>
 
-				<Button :onClick="clickStop">{{ $t("actions.stop") }}</Button>
+				<base-button :onClick="clickStop">{{ $t("actions.stop") }}</base-button>
 			</div>
 		</div>
 	</div>
@@ -44,9 +48,9 @@ import { mapState } from "vuex";
 import router from "@/router";
 import routeName from "@/router/routeName";
 
-import Button from "@/components/Button/Button";
-import TimeInfo from "@/components/TimeInfo/TimeInfo";
-import Timer from "@/components/Timer/Timer";
+import BaseButton from "@/components/BaseButton/BaseButton";
+import HomeTimeInfo from "@/components/HomeTimeInfo/HomeTimeInfo";
+import HomeTimer from "@/components/HomeTimer/HomeTimer";
 
 let intervalID;
 
@@ -54,9 +58,9 @@ export default {
 	name: "Home",
 
 	components: {
-		Button,
-		TimeInfo,
-		Timer,
+		BaseButton,
+		HomeTimeInfo,
+		HomeTimer,
 	},
 
 	data: () => ({

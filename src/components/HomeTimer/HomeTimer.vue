@@ -2,18 +2,18 @@
 	<div class="timer">
 		<div class="timer__title">{{ $t(title) }}</div>
 		<div class="timer__remained">{{ remained | formatTime }}</div>
-		<Cycles :keep="keepCycles" :total="cycles" />
+		<home-timer-cycles :keep="keepCycles" :total="cycles" />
 	</div>
 </template>
 
 <script>
-import Cycles from "@/components/Cycles/Cycles";
+import HomeTimerCycles from "@/components/HomeTimerCycles/HomeTimerCycles";
 
 export default {
-	name: "Timer",
+	name: "HomeTimer",
 
 	components: {
-		Cycles,
+		HomeTimerCycles,
 	},
 
 	props: {

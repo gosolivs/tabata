@@ -9,7 +9,7 @@
 
 <script>
 export default {
-	name: "Cycles",
+	name: "HomeTimerCycles",
 
 	props: {
 		keep: {
