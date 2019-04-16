@@ -95,7 +95,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .settings {
 	height: 100%;
 	display: flex;

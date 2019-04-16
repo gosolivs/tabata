@@ -38,7 +38,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .field {
 	display: block;
 }

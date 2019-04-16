@@ -149,7 +149,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .home {
 	height: 100%;
 	display: flex;

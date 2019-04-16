@@ -24,7 +24,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .cycles {
 	margin: 20px 0;
 }

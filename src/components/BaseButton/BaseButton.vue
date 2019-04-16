@@ -25,7 +25,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .button {
 	border: none;
 	border-radius: 0;
