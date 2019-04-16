@@ -1,5 +1,12 @@
 <template>
-	<div :class="rootClassName">
+	<div
+		:class="[
+			'home',
+			{ 'home--start': started || paused },
+			{ 'home--work': started && !paused && worked },
+			{ 'home--rest': started && !paused && rested },
+		]"
+	>
 		<div class="home__wrap">
 			<home-time-info
 				v-if="!started"
@@ -79,13 +86,6 @@ export default {
 			rest: state => state.rest,
 			work: state => state.work,
 			cycles: state => state.cycles,
-		}),
-
-		rootClassName: ({ started, paused, rested, worked }) => ({
-			home: true,
-			"home--start": started || paused,
-			"home--work": started && !paused && worked,
-			"home--rest": started && !paused && rested,
 		}),
 	},
 

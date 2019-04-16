@@ -49,7 +49,7 @@ export default {
 	margin: 0 0 4px;
 }
 
-.field :global(.v-input-number-input) {
+.field .v-input-number-input {
 	border: none;
 	border-bottom: 1px solid currentColor;
 	font-size: 16px;
@@ -61,7 +61,7 @@ export default {
 	transition: 0.2s;
 }
 
-.field :global(.v-input-number-input):focus {
+.field .v-input-number-input:focus {
 	outline: none;
 	background: #eee;
 	border-bottom-color: #2196f3;
