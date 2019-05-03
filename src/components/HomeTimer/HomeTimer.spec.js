@@ -26,10 +26,9 @@ describe("HomeTimer.vue", () => {
 
 	it("paused state", () => {
 		const wrapper = shallowMount(HomeTimer, {
-			propsData: {
-				...defaultProps,
+			propsData: Object.assign({}, defaultProps, {
 				paused: true,
-			},
+			}),
 			mocks,
 		});
 
@@ -38,10 +37,9 @@ describe("HomeTimer.vue", () => {
 
 	it("rest state", () => {
 		const wrapper = shallowMount(HomeTimer, {
-			propsData: {
-				...defaultProps,
+			propsData: Object.assign({}, defaultProps, {
 				rested: true,
-			},
+			}),
 			mocks,
 		});
 
@@ -50,10 +48,9 @@ describe("HomeTimer.vue", () => {
 
 	it("worked state", () => {
 		const wrapper = shallowMount(HomeTimer, {
-			propsData: {
-				...defaultProps,
+			propsData: Object.assign({}, defaultProps, {
 				worked: true,
-			},
+			}),
 			mocks,
 		});
 

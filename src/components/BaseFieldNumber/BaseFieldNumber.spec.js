@@ -1,7 +1,6 @@
 import { shallowMount } from "@vue/test-utils";
 
 import BaseFieldNumber from "@/components/BaseFieldNumber/BaseFieldNumber";
-import InputNumber from "vue-input-number/index.vue";
 
 const defaultProps = {
 	value: 10,
@@ -26,9 +25,9 @@ describe("BaseFieldNumber.vue", () => {
 
 		const wrapper = shallowMount(BaseFieldNumber, {
 			propsData: defaultProps,
-		}).find(InputNumber);
+		});
 
-		wrapper.vm.$emit("input", text);
+		wrapper.vm.onInput(text);
 		expect(wrapper.emitted().input).toEqual([[text]]);
 	});
 });
