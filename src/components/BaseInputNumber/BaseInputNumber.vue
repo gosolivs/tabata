@@ -60,7 +60,9 @@ export default {
 		},
 
 		max: function(value) {
-			this.quantity = this.quantity > value ? value : this.min;
+			if (this.quantity > value) {
+				this.quantity = value;
+			}
 		},
 	},
 
@@ -98,10 +100,6 @@ export default {
 		},
 
 		onBlur() {
-			if (!this.quantity) {
-				return;
-			}
-
 			if (this.quantity.toString().length === 0) {
 				this.quantity = this.oldValue;
 				return;
@@ -155,14 +153,6 @@ export default {
 			if (
 				// backspace, delete, tab, escape, enter
 				[46, 8, 9, 27, 13].indexOf(event.keyCode) >= 0 ||
-				// Ctrl/cmd+A
-				(event.keyCode === 65 && (event.ctrlKey || event.metaKey)) ||
-				// Ctrl/cmd+C
-				(event.keyCode === 67 && (event.ctrlKey || event.metaKey)) ||
-				// Ctrl/cmd+R
-				(event.keyCode === 82 && (event.ctrlKey || event.metaKey)) ||
-				// Ctrl/cmd+X
-				(event.keyCode === 88 && (event.ctrlKey || event.metaKey)) ||
 				// home, end, left, right
 				(event.keyCode >= 35 && event.keyCode <= 39)
 			) {

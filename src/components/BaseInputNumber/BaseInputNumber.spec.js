@@ -17,99 +17,129 @@ describe("BaseInputNumber.vue", () => {
 		expect(attrs.autocomplete).toEqual("off");
 	});
 
-	it("check prop min", () => {
-		const defaultProps = {
-			min: 1,
-		};
+	it("watch quantity", () => {
+		const newValue = 20;
 
 		const wrapper = shallowMount(BaseInputNumber, {
 			propsData: defaultProps,
 		});
 
-		expect(wrapper.vm.min).toBe(defaultProps.min);
+		wrapper.vm.quantity = newValue;
+		expect(wrapper.vm.oldValue).toBe(newValue);
+		expect(wrapper.vm.quantity).toBe(newValue);
 	});
 
-	it("check prop max", () => {
-		const defaultProps = {
-			max: 1,
-		};
+	it("watch min props", () => {
+		const minValue = 3;
 
 		const wrapper = shallowMount(BaseInputNumber, {
-			propsData: defaultProps,
+			propsData: {
+				value: 2,
+				min: 1,
+			},
 		});
 
-		expect(wrapper.vm.max).toBe(defaultProps.max);
+		wrapper.setProps({
+			min: minValue,
+		});
+
+		expect(wrapper.vm.quantity).toBe(minValue);
 	});
 
-	it("check prop step", () => {
-		const defaultProps = {
-			step: 1,
-		};
+	it("watch max props", () => {
+		const manValue = 9;
 
 		const wrapper = shallowMount(BaseInputNumber, {
-			propsData: defaultProps,
+			propsData: {
+				value: 10,
+				man: 100,
+			},
 		});
 
-		expect(wrapper.vm.step).toBe(defaultProps.step);
-	});
-
-	it("check prop maxlength", () => {
-		const defaultProps = {
-			maxlength: 1,
-		};
-
-		const wrapper = shallowMount(BaseInputNumber, {
-			propsData: defaultProps,
+		wrapper.setProps({
+			max: manValue,
 		});
 
-		expect(wrapper.vm.maxlength).toBe(defaultProps.maxlength);
-	});
-
-	it("default value", () => {
-		const wrapper = shallowMount(BaseInputNumber, {
-			propsData: defaultProps,
-		});
-
-		expect(wrapper.vm.quantity).toEqual(defaultProps.value);
+		expect(wrapper.vm.quantity).toBe(manValue);
 	});
 
 	it("increment", () => {
+		const props = {
+			value: 15,
+			min: 10,
+			max: 16,
+		};
+
 		const wrapper = shallowMount(BaseInputNumber, {
-			propsData: defaultProps,
+			propsData: props,
 		});
 
 		wrapper.trigger("keydown.up");
-		expect(wrapper.vm.quantity).toEqual(defaultProps.value + 1);
+		expect(wrapper.vm.quantity).toEqual(props.value + 1);
+
+		wrapper.trigger("keydown.up");
+		expect(wrapper.vm.quantity).toEqual(props.max);
+
+		wrapper.vm.quantity = 0;
+		wrapper.trigger("keydown.up");
+		expect(wrapper.vm.quantity).toEqual(props.min);
 	});
 
 	it("decrement", () => {
+		const props = {
+			value: 15,
+			min: 14,
+		};
+
 		const wrapper = shallowMount(BaseInputNumber, {
-			propsData: defaultProps,
+			propsData: props,
 		});
 
 		wrapper.trigger("keydown.down");
-		expect(wrapper.vm.quantity).toEqual(defaultProps.value - 1);
+		expect(wrapper.vm.quantity).toEqual(props.value - 1);
+
+		wrapper.trigger("keydown.down");
+		expect(wrapper.vm.quantity).toEqual(props.min);
+
+		wrapper.vm.quantity = 0;
+		wrapper.trigger("keydown.down");
+		expect(wrapper.vm.quantity).toEqual(props.min);
 	});
 
-	it("dot", () => {
+	it("method onBlur", () => {
+		const props = {
+			min: 4,
+			value: 5,
+			max: 6,
+			step: 2,
+		};
+
 		const wrapper = shallowMount(BaseInputNumber, {
-			propsData: defaultProps,
+			propsData: props,
 		});
 
-		wrapper.trigger("keydown", { key: "." });
-		expect(wrapper.vm.quantity).toEqual(defaultProps.value);
+		const input = wrapper.find("input").element;
+		input.focus();
+		input.blur();
+		expect(wrapper.vm.quantity).toEqual(props.value);
+
+		wrapper.vm.quantity = props.min - 10;
+		input.focus();
+		input.blur();
+		expect(wrapper.vm.quantity).toEqual(props.min);
+
+		wrapper.vm.quantity = props.max + 10;
+		input.focus();
+		input.blur();
+		expect(wrapper.vm.quantity).toEqual(props.max);
+
+		wrapper.vm.quantity = "";
+		input.focus();
+		input.blur();
+		expect(wrapper.vm.quantity).toEqual(wrapper.vm.oldValue);
 	});
 
-	it("esc key", () => {
-		const wrapper = shallowMount(BaseInputNumber, {
-			propsData: defaultProps,
-		});
-
-		wrapper.trigger("keydown.esc");
-		expect(wrapper.vm.quantity).toEqual(defaultProps.value);
-	});
-
-	it("onKeyup method", () => {
+	it("method onKeyup", () => {
 		const wrapper = shallowMount(BaseInputNumber, {
 			propsData: defaultProps,
 		});
@@ -118,52 +148,43 @@ describe("BaseInputNumber.vue", () => {
 		expect(wrapper.vm.quantity).toEqual(defaultProps.value);
 	});
 
-	it("evaluateQuantity method", () => {
+	it("key dot", () => {
 		const wrapper = shallowMount(BaseInputNumber, {
 			propsData: defaultProps,
 		});
 
-		wrapper.vm.evaluateQuantity();
+		wrapper.trigger("keydown", { key: "." });
 		expect(wrapper.vm.quantity).toEqual(defaultProps.value);
 	});
 
-	it("onBlur method", () => {
+	it("key esc", () => {
 		const wrapper = shallowMount(BaseInputNumber, {
 			propsData: defaultProps,
 		});
 
-		// todo !!
-		wrapper.vm.onBlur();
+		wrapper.trigger("keydown.esc");
 		expect(wrapper.vm.quantity).toEqual(defaultProps.value);
 	});
 
-	it("increment method", () => {
+	it("key right", () => {
 		const wrapper = shallowMount(BaseInputNumber, {
 			propsData: defaultProps,
 		});
 
-		wrapper.vm.increment();
-		expect(wrapper.vm.quantity).toEqual(defaultProps.value + 1);
+		wrapper.trigger("keydown.right");
+		expect(wrapper.vm.quantity).toEqual(defaultProps.value);
 	});
 
-	it("decrement method", () => {
+	it("check mounted", () => {
+		const props = {
+			min: 2,
+			value: 1,
+		};
+
 		const wrapper = shallowMount(BaseInputNumber, {
-			propsData: defaultProps,
+			propsData: props,
 		});
 
-		wrapper.vm.decrement();
-		expect(wrapper.vm.quantity).toEqual(defaultProps.value - 1);
-	});
-
-	it("emitChange method", () => {
-		const wrapper = shallowMount(BaseInputNumber, {
-			propsData: defaultProps,
-		});
-
-		wrapper.vm.emitChange();
-		expect(wrapper.emitted().input).toEqual([
-			[defaultProps.value, true],
-			[defaultProps.value, false],
-		]);
+		expect(wrapper.vm.quantity).toEqual(props.min);
 	});
 });
