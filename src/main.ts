@@ -5,7 +5,7 @@ import "./styles/global.css";
 import App from "./App.vue";
 import { store } from "./store";
 import { router } from "./router";
-import { locales } from "./i18n";
+import { locales } from "./locales";
 
 createApp(App)
 	.use(locales)
