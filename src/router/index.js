@@ -1,16 +1,14 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 
 import routeName from "./routeName";
 
 import Home from "@/views/Home";
 import Settings from "@/views/Settings";
 
-Vue.use(VueRouter);
-
-const router = new VueRouter({
-	mode: "history",
-	base: process.env.NODE_ENV === "production" ? "/tabata/" : "/",
+export const router = createRouter({
+	history: createWebHistory(
+		process.env.NODE_ENV === "production" ? "/tabata/" : "/",
+	),
 	routes: [
 		{
 			path: "/",

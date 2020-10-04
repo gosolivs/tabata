@@ -13,48 +13,63 @@
     "test": "yarn run spell && yarn run lint && yarn run test:unit"
   },
   "dependencies": {
-    "core-js": "^3.6.5",
-    "vue": "^2.6.12",
-    "vue-i18n": "^8.21.1",
-    "vue-router": "^3.4.4",
-    "vuex": "^3.5.1"
+    "vue": "^3.0.0-0",
+    "vue-i18n": "^9.0.0-0",
+    "vue-router": "^4.0.0-0",
+    "vuex": "^4.0.0-0"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.11.5",
-    "@vue/cli-plugin-babel": "^4.5.6",
-    "@vue/cli-plugin-eslint": "^4.5.6",
-    "@vue/cli-plugin-unit-jest": "^4.5.6",
-    "@vue/cli-service": "^4.5.6",
-    "@vue/test-utils": "1.1.0",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "^10.1.0",
-    "babel-jest": "^26.3.0",
-    "codecov": "^3.7.2",
-    "eslint": "^7.9.0",
-    "eslint-plugin-vue": "^6.2.2",
-    "jest-vue-preprocessor": "^1.7.1",
+    "@types/jest": "^26.0.14",
+    "@typescript-eslint/eslint-plugin": "^4.3.0",
+    "@typescript-eslint/parser": "^4.3.0",
+    "@vue/cli-plugin-eslint": "~4.5.6",
+    "@vue/cli-plugin-router": "~4.5.6",
+    "@vue/cli-plugin-typescript": "~4.5.6",
+    "@vue/cli-plugin-unit-jest": "~4.5.6",
+    "@vue/cli-plugin-vuex": "~4.5.6",
+    "@vue/cli-service": "~4.5.6",
+    "@vue/compiler-sfc": "^3.0.0",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "@vue/eslint-config-typescript": "^5.1.0",
+    "@vue/test-utils": "^2.0.0-0",
+    "eslint": "^7.10.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-vue": "^7.0.0",
     "postcss-flexbugs-fixes": "^4.2.1",
-    "postcss-font-family-system-ui": "^5.0.0",
-    "postcss-pxtorem": "^5.1.1",
+    "postcss-font-family-system-ui": "^4.3.0",
+    "postcss-pxtorem": "^4.0.1",
     "prettier": "^2.1.2",
-    "vue-cli-plugin-i18n": "^1.0.1",
-    "vue-template-compiler": "^2.6.12",
+    "typescript": "~4.0.3",
+    "vue-jest": "^5.0.0-0",
     "yaspeller": "^7.0.0"
   },
   "eslintConfig": {
     "root": true,
     "env": {
-      "node": true,
-      "jest": true
+      "node": true
     },
     "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
+      "plugin:vue/vue3-essential",
+      "eslint:recommended",
+      "@vue/typescript/recommended",
+      "@vue/prettier",
+      "@vue/prettier/@typescript-eslint"
     ],
-    "rules": {},
     "parserOptions": {
-      "parser": "babel-eslint"
-    }
+      "ecmaVersion": 2020
+    },
+    "rules": {},
+    "overrides": [
+      {
+        "files": [
+          "**/__tests__/*.{j,t}s?(x)",
+          "**/tests/unit/**/*.spec.{j,t}s?(x)"
+        ],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
   },
   "postcss": {
     "plugins": {

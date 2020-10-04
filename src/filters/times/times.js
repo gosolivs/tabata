@@ -1,7 +1,3 @@
-import Vue from "vue";
-
-Vue.filter("formatTime", formatTime);
-
 /**
  * To format time mm:ss
  * @param value {number}

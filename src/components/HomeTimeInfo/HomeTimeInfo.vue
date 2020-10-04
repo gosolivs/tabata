@@ -15,12 +15,14 @@
 
 		<div class="info__total">
 			{{ $t("home.total_time") }}:
-			<div class="info__duration">{{ total | formatTime }}</div>
+			<div class="info__duration">{{ totalFormatTime }}</div>
 		</div>
 	</div>
 </template>
 
 <script>
+import { formatTime } from "@/filters/times/times";
+
 export default {
 	name: "HomeTimeInfo",
 
@@ -46,6 +48,7 @@ export default {
 	computed: {
 		total: ({ prepare, rest, work, cycles }) =>
 			prepare + rest * cycles + work * cycles,
+		totalFormatTime: ({ total }) => formatTime(total),
 	},
 };
 </script>

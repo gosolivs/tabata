@@ -1,5 +1,4 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import { createStore } from "vuex";
 
 import {
 	CHANGE_PREPARE,
@@ -9,9 +8,7 @@ import {
 } from "./actions.type";
 import { getStorage, setStorage } from "../utils/storage";
 
-Vue.use(Vuex);
-
-const store = new Vuex.Store({
+export const store = createStore({
 	state: {
 		prepare: getStorage("prepare") ? parseInt(getStorage("prepare"), 10) : 10,
 		rest: getStorage("rest") ? parseInt(getStorage("rest"), 10) : 30,

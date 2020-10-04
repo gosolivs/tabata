@@ -1,13 +1,14 @@
 <template>
 	<div class="timer">
 		<div class="timer__title">{{ $t(title) }}</div>
-		<div class="timer__remained">{{ remained | formatTime }}</div>
+		<div class="timer__remained">{{ remainedFormatTime }}</div>
 		<home-timer-cycles :keep="keepCycles" :total="cycles" />
 	</div>
 </template>
 
 <script>
 import HomeTimerCycles from "@/components/HomeTimerCycles/HomeTimerCycles";
+import { formatTime } from "@/filters/times/times";
 
 export default {
 	name: "HomeTimer",
@@ -51,6 +52,7 @@ export default {
 					return "states.prepare";
 			}
 		},
+		remainedFormatTime: ({ remained }) => formatTime(remained),
 	},
 };
 </script>
