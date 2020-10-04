@@ -32,9 +32,7 @@
     "codecov": "^3.7.2",
     "eslint": "^7.9.0",
     "eslint-plugin-vue": "^6.2.2",
-    "husky": "^4.3.0",
     "jest-vue-preprocessor": "^1.7.1",
-    "lint-staged": "^10.4.0",
     "postcss-flexbugs-fixes": "^4.2.1",
     "postcss-font-family-system-ui": "^5.0.0",
     "postcss-pxtorem": "^5.1.1",
@@ -80,22 +78,5 @@
   "browserslist": [
     "last 2 versions",
     "not ie <= 10"
-  ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "yarn run test:unit"
-    }
-  },
-  "lint-staged": {
-    "*.(js|vue)": [
-      "yarn run lint:write",
-      "vue-cli-service lint",
-      "git add"
-    ],
-    "src/locales/*.json": [
-      "yarn spell",
-      "git add"
-    ]
-  }
+  ]
 }
