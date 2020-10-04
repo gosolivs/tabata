@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import routeName from "./routeName";
+import { pages } from "./pages";
 
-import Home from "@/views/Home";
-import Settings from "@/views/Settings";
+import Home from "@/views/Home.vue";
+import Settings from "@/views/Settings.vue";
 
 export const router = createRouter({
 	history: createWebHistory(
@@ -12,12 +12,12 @@ export const router = createRouter({
 	routes: [
 		{
 			path: "/",
-			name: routeName.home,
+			name: pages.home,
 			component: Home,
 		},
 		{
 			path: "/settings/",
-			name: routeName.settings,
+			name: pages.settings,
 			component: Settings,
 		},
 	],

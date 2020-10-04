@@ -10,7 +10,7 @@ const defaultProps = {
 };
 
 const mocks = {
-	$t: value => value,
+	$t: (value) => value,
 };
 
 describe("HomeTimer.vue", () => {

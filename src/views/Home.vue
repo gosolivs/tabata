@@ -52,8 +52,7 @@
 <script>
 import { mapState } from "vuex";
 
-import router from "@/router";
-import routeName from "@/router/routeName";
+import { pages } from "@/router/pages";
 
 import BaseButton from "@/components/BaseButton/BaseButton";
 import HomeTimeInfo from "@/components/HomeTimeInfo/HomeTimeInfo";
@@ -82,10 +81,10 @@ export default {
 
 	computed: {
 		...mapState({
-			prepare: state => state.prepare,
-			rest: state => state.rest,
-			work: state => state.work,
-			cycles: state => state.cycles,
+			prepare: (state) => state.prepare,
+			rest: (state) => state.rest,
+			work: (state) => state.work,
+			cycles: (state) => state.cycles,
 		}),
 	},
 
@@ -93,7 +92,7 @@ export default {
 		clickSettings() {
 			this.started = false;
 			this.paused = false;
-			router.push({ name: routeName.settings });
+			this.$router.push({ name: pages.settings });
 		},
 
 		clickStart() {

@@ -1,9 +1,7 @@
 /**
  * To format time mm:ss
- * @param value {number}
- * @return {string}
  */
-export function formatTime(value) {
+export function formatTime(value: number): string {
 	const minutes = Math.floor(value / 60);
 	const seconds = Math.round(value - minutes * 60);
 

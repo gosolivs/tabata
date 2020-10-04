@@ -49,17 +49,17 @@ export default {
 	},
 
 	watch: {
-		quantity: function() {
+		quantity: function () {
 			this.evaluateQuantity();
 		},
 
-		min: function(value) {
+		min: function (value) {
 			if (this.quantity < value) {
 				this.quantity = value;
 			}
 		},
 
-		max: function(value) {
+		max: function (value) {
 			if (this.quantity > value) {
 				this.quantity = value;
 			}
@@ -170,7 +170,7 @@ export default {
 			if (
 				event.keyCode === 110 ||
 				event.keyCode === 190 ||
-				((event.shiftKey || (event.keyCode < 48 || event.keyCode > 57)) &&
+				((event.shiftKey || event.keyCode < 48 || event.keyCode > 57) &&
 					(event.keyCode < 96 || event.keyCode > 105))
 			) {
 				event.preventDefault();

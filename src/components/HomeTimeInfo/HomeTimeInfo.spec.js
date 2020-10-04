@@ -15,7 +15,7 @@ describe("HomeTimeInfo.vue", () => {
 		const wrapper = shallowMount(HomeTimeInfo, {
 			propsData: defaultProps,
 			mocks: {
-				$t: value => value,
+				$t: (value) => value,
 			},
 		});
 

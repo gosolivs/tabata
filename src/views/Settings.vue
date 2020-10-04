@@ -48,8 +48,7 @@ import {
 	CHANGE_CYCLES,
 } from "@/store/actions.type";
 
-import router from "@/router";
-import routeName from "@/router/routeName";
+import { pages } from "@/router/pages";
 
 import BaseButton from "@/components/BaseButton/BaseButton";
 import BaseFieldNumber from "@/components/BaseFieldNumber/BaseFieldNumber";
@@ -64,16 +63,16 @@ export default {
 
 	computed: {
 		...mapState({
-			prepare: state => state.prepare,
-			rest: state => state.rest,
-			work: state => state.work,
-			cycles: state => state.cycles,
+			prepare: (state) => state.prepare,
+			rest: (state) => state.rest,
+			work: (state) => state.work,
+			cycles: (state) => state.cycles,
 		}),
 	},
 
 	methods: {
 		save() {
-			router.push({ name: routeName.home });
+			this.$router.push({ name: pages.home });
 		},
 
 		updatePrepare(value) {
