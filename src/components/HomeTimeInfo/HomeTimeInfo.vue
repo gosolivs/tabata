@@ -20,10 +20,12 @@
 	</div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, computed } from "vue";
+
 import { formatTime } from "@/filters/times/times";
 
-export default {
+export default defineComponent({
 	name: "HomeTimeInfo",
 
 	props: {
@@ -45,12 +47,18 @@ export default {
 		},
 	},
 
-	computed: {
-		total: ({ prepare, rest, work, cycles }) =>
-			prepare + rest * cycles + work * cycles,
-		totalFormatTime: ({ total }) => formatTime(total),
+	setup(props) {
+		const total = computed(
+			() =>
+				props.prepare + props.rest * props.cycles + props.work * props.cycles,
+		);
+
+		return {
+			total,
+			totalFormatTime: computed(() => formatTime(total.value)),
+		};
 	},
-};
+});
 </script>
 
 <style>

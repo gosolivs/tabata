@@ -9,16 +9,18 @@
 			:step="1"
 			:maxlength="10"
 			:value="value"
-			@input="onInput"
+			@input="handleInput"
 			class="field__input"
 		/>
 	</label>
 </template>
 
-<script>
-import BaseInputNumber from "@/components/BaseInputNumber/BaseInputNumber";
+<script lang="ts">
+import { defineComponent } from "vue";
 
-export default {
+import BaseInputNumber from "@/components/BaseInputNumber/BaseInputNumber.vue";
+
+export default defineComponent({
 	name: "BaseFieldNumber",
 
 	components: {
@@ -26,7 +28,7 @@ export default {
 	},
 
 	methods: {
-		onInput(value) {
+		handleInput(value: number): void {
 			this.$emit("input", value);
 		},
 	},
@@ -37,7 +39,7 @@ export default {
 			required: true,
 		},
 	},
-};
+});
 </script>
 
 <style>

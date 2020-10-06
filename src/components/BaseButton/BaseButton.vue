@@ -1,28 +1,35 @@
 <template>
-	<button :class="className" @click="onClick">
+	<button :class="classes" @click="onClick">
 		<slot />
 	</button>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent, computed } from "vue";
+
+export default defineComponent({
 	name: "BaseButton",
 
-	computed: {
-		className: ({ isGray }) => ({
-			button: true,
-			"button--gray": isGray,
-		}),
-	},
-
 	props: {
-		isGray: Boolean,
+		isGray: {
+			type: Boolean,
+			default: false,
+		},
 		onClick: {
 			type: Function,
 			required: true,
 		},
 	},
-};
+
+	setup(props) {
+		return {
+			classes: computed(() => ({
+				button: true,
+				"button--gray": props.isGray,
+			})),
+		};
+	},
+});
 </script>
 
 <style>

@@ -4,14 +4,16 @@
 		:maxlength="maxlength"
 		autocomplete="off"
 		v-model.number="quantity"
-		@keyup="onKeyup"
-		@keydown="onKeydown"
-		@blur="onBlur"
+		@keyup="handleKeyup"
+		@keydown="handleKeydown"
+		@blur="handleBlur"
 	/>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
 	name: "BaseInputNumber",
 
 	props: {
@@ -49,17 +51,17 @@ export default {
 	},
 
 	watch: {
-		quantity: function () {
+		quantity: function (): void {
 			this.evaluateQuantity();
 		},
 
-		min: function (value) {
+		min: function (value: number): void {
 			if (this.quantity < value) {
 				this.quantity = value;
 			}
 		},
 
-		max: function (value) {
+		max: function (value: number): void {
 			if (this.quantity > value) {
 				this.quantity = value;
 			}
@@ -71,7 +73,7 @@ export default {
 	},
 
 	methods: {
-		emitChange(init = false) {
+		emitChange(init = false): void {
 			this.oldValue = this.quantity;
 
 			if (init) {
@@ -81,7 +83,7 @@ export default {
 			this.$emit("input", this.quantity, init);
 		},
 
-		increment() {
+		increment(): void {
 			if (!this.quantity) {
 				this.quantity = this.min;
 			} else {
@@ -90,7 +92,7 @@ export default {
 			}
 		},
 
-		decrement() {
+		decrement(): void {
 			if (!this.quantity) {
 				this.quantity = this.min;
 			} else {
@@ -99,7 +101,20 @@ export default {
 			}
 		},
 
-		onBlur() {
+		evaluateQuantity(): void {
+			if (this.isKeydown) {
+				return;
+			}
+
+			if (
+				this.quantity.toString().length > 0 &&
+				this.quantity !== this.oldValue
+			) {
+				this.emitChange();
+			}
+		},
+
+		handleBlur(): void {
 			if (this.quantity.toString().length === 0) {
 				this.quantity = this.oldValue;
 				return;
@@ -114,25 +129,12 @@ export default {
 			}
 		},
 
-		evaluateQuantity() {
-			if (this.isKeydown) {
-				return;
-			}
-
-			if (
-				this.quantity.toString().length > 0 &&
-				this.quantity !== this.oldValue
-			) {
-				this.emitChange();
-			}
-		},
-
-		onKeyup() {
+		handleKeyup(): void {
 			this.isKeydown = false;
 			this.evaluateQuantity();
 		},
 
-		onKeydown(event) {
+		handleKeydown(event: KeyboardEvent): void {
 			this.isKeydown = true;
 
 			// Up key: Increase the value
@@ -177,5 +179,5 @@ export default {
 			}
 		},
 	},
-};
+});
 </script>

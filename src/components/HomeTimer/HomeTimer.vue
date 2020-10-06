@@ -6,11 +6,13 @@
 	</div>
 </template>
 
-<script>
-import HomeTimerCycles from "@/components/HomeTimerCycles/HomeTimerCycles";
+<script lang="ts">
+import { defineComponent, computed } from "vue";
+
+import HomeTimerCycles from "@/components/HomeTimerCycles/HomeTimerCycles.vue";
 import { formatTime } from "@/filters/times/times";
 
-export default {
+export default defineComponent({
 	name: "HomeTimer",
 
 	components: {
@@ -30,31 +32,43 @@ export default {
 			type: Number,
 			required: true,
 		},
-		rested: Boolean,
-		worked: Boolean,
-		paused: Boolean,
-	},
-
-	computed: {
-		keepCycles: ({ remainedCycles, cycles }) => cycles - remainedCycles,
-		title: ({ paused, worked, rested }) => {
-			switch (true) {
-				case paused:
-					return "states.pause";
-
-				case worked:
-					return "states.work";
-
-				case rested:
-					return "states.rest";
-
-				default:
-					return "states.prepare";
-			}
+		rested: {
+			type: Boolean,
+			default: false,
 		},
-		remainedFormatTime: ({ remained }) => formatTime(remained),
+		worked: {
+			type: Boolean,
+			default: false,
+		},
+		paused: {
+			type: Boolean,
+			default: false,
+		},
 	},
-};
+
+	setup(props) {
+		return {
+			keepCycles: computed(() => props.cycles - props.remainedCycles),
+			remainedFormatTime: computed(() => formatTime(props.remained)),
+
+			title: computed(() => {
+				switch (true) {
+					case props.paused:
+						return "states.pause";
+
+					case props.worked:
+						return "states.work";
+
+					case props.rested:
+						return "states.rest";
+
+					default:
+						return "states.prepare";
+				}
+			}),
+		};
+	},
+});
 </script>
 
 <style>
