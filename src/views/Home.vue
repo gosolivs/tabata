@@ -1,12 +1,5 @@
 <template>
-	<div
-		:class="[
-			'home',
-			{ 'home--start': started || paused },
-			{ 'home--work': started && !paused && worked },
-			{ 'home--rest': started && !paused && rested },
-		]"
-	>
+	<div :class="classes">
 		<div class="home__wrap">
 			<home-time-info
 				v-if="!started"
@@ -49,18 +42,17 @@
 	</div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import { mapState } from "vuex";
 
 import { pages } from "@/router/pages";
 
-import BaseButton from "@/components/BaseButton/BaseButton";
-import HomeTimeInfo from "@/components/HomeTimeInfo/HomeTimeInfo";
-import HomeTimer from "@/components/HomeTimer/HomeTimer";
+import BaseButton from "@/components/BaseButton/BaseButton.vue";
+import HomeTimeInfo from "@/components/HomeTimeInfo/HomeTimeInfo.vue";
+import HomeTimer from "@/components/HomeTimer/HomeTimer.vue";
 
-let intervalID;
-
-export default {
+export default defineComponent({
 	name: "Home",
 
 	components: {
@@ -77,52 +69,58 @@ export default {
 
 		remained: 0,
 		remainedCycles: 0,
+
+		intervalID: 0,
 	}),
 
 	computed: {
-		...mapState({
-			prepare: (state) => state.prepare,
-			rest: (state) => state.rest,
-			work: (state) => state.work,
-			cycles: (state) => state.cycles,
-		}),
+		...mapState(["prepare", "rest", "work", "cycles"]),
+
+		classes(): Record<string, boolean> {
+			return {
+				home: true,
+				"home--start": this.started || this.paused,
+				"home--work": this.started && !this.paused && this.worked,
+				"home--rest": this.started && !this.paused && this.rested,
+			};
+		},
 	},
 
 	methods: {
-		clickSettings() {
+		clickSettings(): void {
 			this.started = false;
 			this.paused = false;
 			this.$router.push({ name: pages.settings });
 		},
 
-		clickStart() {
+		clickStart(): void {
 			this.started = true;
 			this.paused = false;
 			this.remained = this.prepare;
 			this.remainedCycles = this.cycles;
 
-			intervalID = setInterval(this.changeTimer.bind(this), 1000);
+			this.intervalID = setInterval(this.changeTimer.bind(this), 1000);
 		},
 
-		clickStop() {
+		clickStop(): void {
 			this.started = false;
 			this.paused = false;
 			this.worked = false;
 			this.rested = false;
-			clearInterval(intervalID);
+			clearInterval(this.intervalID);
 		},
 
-		clickTogglePause() {
+		clickTogglePause(): void {
 			this.paused = !this.paused;
 
 			if (!this.paused) {
-				intervalID = setInterval(this.changeTimer.bind(this), 1000);
+				this.intervalID = setInterval(this.changeTimer.bind(this), 1000);
 			} else {
-				clearInterval(intervalID);
+				clearInterval(this.intervalID);
 			}
 		},
 
-		changeTimer() {
+		changeTimer(): void {
 			this.remained -= 1;
 
 			if (this.remained === 0) {
@@ -145,7 +143,7 @@ export default {
 			}
 		},
 	},
-};
+});
 </script>
 
 <style>

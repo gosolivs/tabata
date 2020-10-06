@@ -39,24 +39,24 @@ export const store = createStore<State>({
 	},
 
 	mutations: {
-		[CHANGE_PREPARE](state, value) {
+		[CHANGE_PREPARE](state, value: number): void {
 			state.prepare = value;
-			setStorage(storageKeys.prepare, value);
+			setStorage(storageKeys.prepare, value.toString());
 		},
 
-		[CHANGE_REST](state, value) {
+		[CHANGE_REST](state, value: number): void {
 			state.rest = value;
-			setStorage(storageKeys.rest, value);
+			setStorage(storageKeys.rest, value.toString());
 		},
 
-		[CHANGE_WORK](state, value) {
+		[CHANGE_WORK](state, value: number): void {
 			state.work = value;
-			setStorage(storageKeys.work, value);
+			setStorage(storageKeys.work, value.toString());
 		},
 
-		[CHANGE_CYCLES](state, value) {
+		[CHANGE_CYCLES](state, value: number): void {
 			state.cycles = value;
-			setStorage(storageKeys.cycles, value);
+			setStorage(storageKeys.cycles, value.toString());
 		},
 	},
 });

@@ -39,8 +39,10 @@
 	</div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import { mapState } from "vuex";
+
 import {
 	CHANGE_PREPARE,
 	CHANGE_REST,
@@ -50,10 +52,10 @@ import {
 
 import { pages } from "@/router/pages";
 
-import BaseButton from "@/components/BaseButton/BaseButton";
-import BaseFieldNumber from "@/components/BaseFieldNumber/BaseFieldNumber";
+import BaseButton from "@/components/BaseButton/BaseButton.vue";
+import BaseFieldNumber from "@/components/BaseFieldNumber/BaseFieldNumber.vue";
 
-export default {
+export default defineComponent({
 	name: "Settings",
 
 	components: {
@@ -62,36 +64,31 @@ export default {
 	},
 
 	computed: {
-		...mapState({
-			prepare: (state) => state.prepare,
-			rest: (state) => state.rest,
-			work: (state) => state.work,
-			cycles: (state) => state.cycles,
-		}),
+		...mapState(["prepare", "rest", "work", "cycles"]),
 	},
 
 	methods: {
-		save() {
+		save(): void {
 			this.$router.push({ name: pages.home });
 		},
 
-		updatePrepare(value) {
+		updatePrepare(value: number): void {
 			this.$store.commit(CHANGE_PREPARE, value);
 		},
 
-		updateRest(value) {
+		updateRest(value: number): void {
 			this.$store.commit(CHANGE_REST, value);
 		},
 
-		updateWork(value) {
+		updateWork(value: number): void {
 			this.$store.commit(CHANGE_WORK, value);
 		},
 
-		updateCycles(value) {
+		updateCycles(value: number): void {
 			this.$store.commit(CHANGE_CYCLES, value);
 		},
 	},
-};
+});
 </script>
 
 <style>
