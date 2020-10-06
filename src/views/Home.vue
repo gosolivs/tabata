@@ -79,9 +79,9 @@ export default defineComponent({
 		classes(): Record<string, boolean> {
 			return {
 				home: true,
-				"home--start": this.started || this.paused,
-				"home--work": this.started && !this.paused && this.worked,
-				"home--rest": this.started && !this.paused && this.rested,
+				"home_start": this.started || this.paused,
+				"home_work": this.started && !this.paused && this.worked,
+				"home_rest": this.started && !this.paused && this.rested,
 			};
 		},
 	},
@@ -155,15 +155,15 @@ export default defineComponent({
 	transition: 0.2s;
 }
 
-.home--start {
+.home_start {
 	background: #eee;
 }
 
-.home--work {
+.home_work {
 	background: #f99;
 }
 
-.home--rest {
+.home_rest {
 	background: #50b98a;
 }
 

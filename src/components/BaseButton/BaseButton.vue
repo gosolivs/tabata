@@ -20,7 +20,7 @@ export default defineComponent({
 	setup(props, { emit }: SetupContext<["click"]>) {
 		const classes = computed(() => ({
 			button: true,
-			"button--gray": props.isGray,
+			"button_gray": props.isGray,
 		}));
 
 		const handleClick = () => emit("click");
@@ -57,13 +57,13 @@ export default defineComponent({
 	filter: blur(2px);
 }
 
-.button--gray {
+.button_gray {
 	background: #e0e0e0;
 	color: #000;
 }
 
-.button--gray:hover,
-.button--gray:focus {
+.button_gray:hover,
+.button_gray:focus {
 	background: #d5d5d5;
 }
 </style>

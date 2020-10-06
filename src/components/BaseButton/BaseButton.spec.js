@@ -35,6 +35,6 @@ describe("BaseButton.vue", () => {
 			},
 		});
 
-		expect(wrapper.attributes().class).toMatch("button--gray");
+		expect(wrapper.attributes().class).toMatch("button_gray");
 	});
 });
