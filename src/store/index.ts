@@ -9,6 +9,13 @@ import {
 	CHANGE_CYCLES,
 } from "./actions.type";
 
+export type State = {
+	prepare: number;
+	rest: number;
+	work: number;
+	cycles: number;
+};
+
 const storageKeys = {
 	prepare: "prepare",
 	rest: "rest",
@@ -16,7 +23,7 @@ const storageKeys = {
 	cycles: "cycles",
 };
 
-export const store = createStore({
+export const store = createStore<State>({
 	state: () => {
 		const prepare = getStorage(storageKeys.prepare);
 		const rest = getStorage(storageKeys.rest);
