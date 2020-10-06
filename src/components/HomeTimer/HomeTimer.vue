@@ -47,25 +47,29 @@ export default defineComponent({
 	},
 
 	setup(props) {
+		const keepCycles = computed(() => props.cycles - props.remainedCycles);
+		const remainedFormatTime = computed(() => formatTime(props.remained));
+
+		const title = computed(() => {
+			switch (true) {
+				case props.paused:
+					return "states.pause";
+
+				case props.worked:
+					return "states.work";
+
+				case props.rested:
+					return "states.rest";
+
+				default:
+					return "states.prepare";
+			}
+		});
+
 		return {
-			keepCycles: computed(() => props.cycles - props.remainedCycles),
-			remainedFormatTime: computed(() => formatTime(props.remained)),
-
-			title: computed(() => {
-				switch (true) {
-					case props.paused:
-						return "states.pause";
-
-					case props.worked:
-						return "states.work";
-
-					case props.rested:
-						return "states.rest";
-
-					default:
-						return "states.prepare";
-				}
-			}),
+			keepCycles,
+			remainedFormatTime,
+			title,
 		};
 	},
 });

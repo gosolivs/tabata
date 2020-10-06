@@ -1,11 +1,11 @@
 <template>
-	<button :class="classes" @click="onClick">
+	<button :class="classes" @click="handleClick">
 		<slot />
 	</button>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, SetupContext } from "vue";
 
 export default defineComponent({
 	name: "BaseButton",
@@ -15,18 +15,19 @@ export default defineComponent({
 			type: Boolean,
 			default: false,
 		},
-		onClick: {
-			type: Function,
-			required: true,
-		},
 	},
 
-	setup(props) {
+	setup(props, { emit }: SetupContext<["click"]>) {
+		const classes = computed(() => ({
+			button: true,
+			"button--gray": props.isGray,
+		}));
+
+		const handleClick = () => emit("click");
+
 		return {
-			classes: computed(() => ({
-				button: true,
-				"button--gray": props.isGray,
-			})),
+			classes,
+			handleClick,
 		};
 	},
 });

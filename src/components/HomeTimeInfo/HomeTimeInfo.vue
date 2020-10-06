@@ -53,9 +53,11 @@ export default defineComponent({
 				props.prepare + props.rest * props.cycles + props.work * props.cycles,
 		);
 
+		const totalFormatTime = computed(() => formatTime(total.value));
+
 		return {
 			total,
-			totalFormatTime: computed(() => formatTime(total.value)),
+			totalFormatTime,
 		};
 	},
 });

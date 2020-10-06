@@ -5,43 +5,44 @@
 
 			<div class="settings__main">
 				<div class="settings__field">
-					<base-field-number :value="prepare" @input="updatePrepare">
+					<base-field-number v-model="prepare">
 						{{ $t("states.prepare")
 						}}<span class="settings__note">, {{ $t("time_unit") }}</span>
 					</base-field-number>
 				</div>
 
 				<div class="settings__field">
-					<base-field-number :value="rest" @input="updateRest">
+					<base-field-number v-model="rest">
 						{{ $t("states.rest")
 						}}<span class="settings__note">, {{ $t("time_unit") }}</span>
 					</base-field-number>
 				</div>
 
 				<div class="settings__field">
-					<base-field-number :value="work" @input="updateWork">
+					<base-field-number v-model="work">
 						{{ $t("states.work")
 						}}<span class="settings__note">, {{ $t("time_unit") }}</span>
 					</base-field-number>
 				</div>
 
 				<div class="settings__field">
-					<base-field-number :value="cycles" @input="updateCycles">
+					<base-field-number v-model="cycles">
 						{{ $t("settings.cycles") }}
 					</base-field-number>
 				</div>
 			</div>
 
 			<div class="settings__controls">
-				<base-button :onClick="save">{{ $t("actions.close") }}</base-button>
+				<base-button @click="handleSave">{{ $t("actions.close") }}</base-button>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { mapState } from "vuex";
+import { defineComponent, computed } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 import {
 	CHANGE_PREPARE,
@@ -49,6 +50,7 @@ import {
 	CHANGE_WORK,
 	CHANGE_CYCLES,
 } from "@/store/actions.type";
+import { State } from "@/store";
 
 import { pages } from "@/router/pages";
 
@@ -63,30 +65,39 @@ export default defineComponent({
 		BaseFieldNumber,
 	},
 
-	computed: {
-		...mapState(["prepare", "rest", "work", "cycles"]),
-	},
+	setup() {
+		const store = useStore<State>();
+		const router = useRouter();
 
-	methods: {
-		save(): void {
-			this.$router.push({ name: pages.home });
-		},
+		const prepare = computed({
+			get: () => store.state.prepare,
+			set: (value: number) => store.commit(CHANGE_PREPARE, value),
+		});
 
-		updatePrepare(value: number): void {
-			this.$store.commit(CHANGE_PREPARE, value);
-		},
+		const rest = computed({
+			get: () => store.state.rest,
+			set: (value: number) => store.commit(CHANGE_REST, value),
+		});
 
-		updateRest(value: number): void {
-			this.$store.commit(CHANGE_REST, value);
-		},
+		const work = computed({
+			get: () => store.state.work,
+			set: (value: number) => store.commit(CHANGE_WORK, value),
+		});
 
-		updateWork(value: number): void {
-			this.$store.commit(CHANGE_WORK, value);
-		},
+		const cycles = computed({
+			get: () => store.state.cycles,
+			set: (value: number) => store.commit(CHANGE_CYCLES, value),
+		});
 
-		updateCycles(value: number): void {
-			this.$store.commit(CHANGE_CYCLES, value);
-		},
+		const handleSave = () => router.push({ name: pages.home });
+
+		return {
+			prepare,
+			rest,
+			work,
+			cycles,
+			handleSave,
+		};
 	},
 });
 </script>

@@ -17,7 +17,7 @@ export default defineComponent({
 	name: "BaseInputNumber",
 
 	props: {
-		value: {
+		modelValue: {
 			type: Number,
 			default: 0,
 		},
@@ -39,16 +39,11 @@ export default defineComponent({
 		},
 	},
 
-	data: ({ value }) => ({
-		quantity: value,
-		oldValue: value,
+	data: ({ modelValue }) => ({
+		quantity: modelValue,
+		oldValue: modelValue,
 		isKeydown: false,
 	}),
-
-	model: {
-		prop: "value",
-		event: "input",
-	},
 
 	watch: {
 		quantity: function (): void {
@@ -77,10 +72,10 @@ export default defineComponent({
 			this.oldValue = this.quantity;
 
 			if (init) {
-				this.quantity = this.value < this.min ? this.min : this.value;
+				this.quantity = this.modelValue < this.min ? this.min : this.modelValue;
 			}
 
-			this.$emit("input", this.quantity, init);
+			this.$emit("update:modelValue", this.quantity);
 		},
 
 		increment(): void {

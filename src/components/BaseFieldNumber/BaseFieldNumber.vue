@@ -5,18 +5,17 @@
 		</span>
 
 		<base-input-number
+			v-model="value"
 			:min="1"
 			:step="1"
 			:maxlength="10"
-			:value="value"
-			@input="handleInput"
 			class="field__input"
 		/>
 	</label>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed, SetupContext } from "vue";
 
 import BaseInputNumber from "@/components/BaseInputNumber/BaseInputNumber.vue";
 
@@ -27,17 +26,20 @@ export default defineComponent({
 		BaseInputNumber,
 	},
 
-	methods: {
-		handleInput(value: number): void {
-			this.$emit("input", value);
+	props: {
+		modelValue: {
+			type: Number,
+			default: 0,
 		},
 	},
 
-	props: {
-		value: {
-			type: Number,
-			required: true,
-		},
+	setup(props, { emit }: SetupContext<["update:modelValue"]>) {
+		const value = computed({
+			get: () => props.modelValue,
+			set: (value: number) => emit("update:modelValue", value),
+		});
+
+		return { value };
 	},
 });
 </script>
