@@ -2,19 +2,19 @@
 	<div class="info">
 		<ul class="info__list">
 			<li class="info__item">
-				{{ $t("states.prepare") }}: {{ prepare }} {{ $t("time_unit") }}
+				{{ i18n.t("states.prepare") }}: {{ prepare }} {{ i18n.t("time_unit") }}
 			</li>
 			<li class="info__item">
-				{{ $t("states.rest") }}: {{ rest }} {{ $t("time_unit") }}
+				{{ i18n.t("states.rest") }}: {{ rest }} {{ i18n.t("time_unit") }}
 			</li>
 			<li class="info__item">
-				{{ $t("states.work") }}: {{ work }} {{ $t("time_unit") }}
+				{{ i18n.t("states.work") }}: {{ work }} {{ i18n.t("time_unit") }}
 			</li>
-			<li class="info__item">{{ $t("settings.cycles") }}: {{ cycles }}</li>
+			<li class="info__item">{{ i18n.t("settings.cycles") }}: {{ cycles }}</li>
 		</ul>
 
 		<div class="info__total">
-			{{ $t("home.total_time") }}:
+			{{ i18n.t("home.total_time") }}:
 			<div class="info__duration">{{ totalFormatTime }}</div>
 		</div>
 	</div>
@@ -22,6 +22,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
+import { useI18n } from "vue-i18n";
 
 import { formatTime } from "@/libs/serializers/times/times";
 
@@ -48,6 +49,8 @@ export default defineComponent({
 	},
 
 	setup(props) {
+		const i18n = useI18n();
+
 		const total = computed(
 			() =>
 				props.prepare + props.rest * props.cycles + props.work * props.cycles,
@@ -56,6 +59,7 @@ export default defineComponent({
 		const totalFormatTime = computed(() => formatTime(total.value));
 
 		return {
+			i18n,
 			total,
 			totalFormatTime,
 		};

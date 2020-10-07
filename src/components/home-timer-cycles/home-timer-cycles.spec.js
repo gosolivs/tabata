@@ -1,6 +1,7 @@
-import { shallowMount } from "@vue/test-utils";
+import { mount } from "@vue/test-utils";
 
 import HomeTimerCycles from "@/components/home-timer-cycles/home-timer-cycles";
+import { locales } from "@/locales/locales";
 
 describe("HomeTimerCycles.vue", () => {
 	it("simple render", () => {
@@ -9,10 +10,10 @@ describe("HomeTimerCycles.vue", () => {
 			total: 30,
 		};
 
-		const wrapper = shallowMount(HomeTimerCycles, {
-			propsData: props,
-			mocks: {
-				$t() {},
+		const wrapper = mount(HomeTimerCycles, {
+			props: props,
+			global: {
+				plugins: [locales],
 			},
 		});
 

@@ -1,7 +1,8 @@
-import { shallowMount } from "@vue/test-utils";
+import { mount } from "@vue/test-utils";
 
 import HomeTimeInfo from "@/components/home-time-info/home-time-info";
 import { formatTime } from "@/libs/serializers/times/times";
+import { locales } from "@/locales/locales";
 
 const defaultProps = {
 	prepare: 2,
@@ -12,29 +13,29 @@ const defaultProps = {
 
 describe("HomeTimeInfo.vue", () => {
 	it("props render", () => {
-		const wrapper = shallowMount(HomeTimeInfo, {
-			propsData: defaultProps,
-			mocks: {
-				$t: (value) => value,
+		const wrapper = mount(HomeTimeInfo, {
+			props: defaultProps,
+			global: {
+				plugins: [locales],
 			},
 		});
 
 		const allItems = wrapper.findAll(".info__item");
 
-		expect(allItems.at(0).text()).toMatch(`: ${defaultProps.prepare} `);
-		expect(allItems.at(1).text()).toMatch(`: ${defaultProps.rest} `);
-		expect(allItems.at(2).text()).toMatch(`: ${defaultProps.work} `);
-		expect(allItems.at(3).text()).toMatch(`: ${defaultProps.cycles}`);
+		expect(allItems[0].text()).toMatch(`: ${defaultProps.prepare} `);
+		expect(allItems[1].text()).toMatch(`: ${defaultProps.rest} `);
+		expect(allItems[2].text()).toMatch(`: ${defaultProps.work} `);
+		expect(allItems[3].text()).toMatch(`: ${defaultProps.cycles}`);
 	});
 
 	it("total time", () => {
 		const { prepare, rest, work, cycles } = defaultProps;
 		const totalTime = prepare + rest * cycles + work * cycles;
 
-		const wrapper = shallowMount(HomeTimeInfo, {
-			propsData: defaultProps,
-			mocks: {
-				$t() {},
+		const wrapper = mount(HomeTimeInfo, {
+			props: defaultProps,
+			global: {
+				plugins: [locales],
 			},
 		});
 

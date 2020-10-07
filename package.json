@@ -46,6 +46,7 @@
   "eslintConfig": {
     "root": true,
     "env": {
+      "jest": true,
       "node": true
     },
     "extends": [

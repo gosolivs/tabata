@@ -1,6 +1,6 @@
 <template>
 	<div class="cycles">
-		<div class="cycles__title">{{ $t("home.cycles") }}:</div>
+		<div class="cycles__title">{{ title }}:</div>
 
 		<span class="cycles__keep">{{ keep }}</span>
 		<span class="cycles__total">/{{ total }}</span>
@@ -9,6 +9,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
 	name: "HomeTimerCycles",
@@ -22,6 +23,14 @@ export default defineComponent({
 			type: Number,
 			required: true,
 		},
+	},
+
+	setup() {
+		const i18n = useI18n();
+
+		const title = i18n.t("home.cycles");
+
+		return { title };
 	},
 });
 </script>

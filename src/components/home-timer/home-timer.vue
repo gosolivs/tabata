@@ -1,6 +1,6 @@
 <template>
 	<div class="timer">
-		<div class="timer__title">{{ $t(title) }}</div>
+		<div class="timer__title">{{ title }}</div>
 		<div class="timer__remained">{{ remainedFormatTime }}</div>
 		<home-timer-cycles :keep="keepCycles" :total="cycles" />
 	</div>
@@ -8,6 +8,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
+import { useI18n } from "vue-i18n";
 
 import HomeTimerCycles from "@/components/home-timer-cycles/home-timer-cycles.vue";
 import { formatTime } from "@/libs/serializers/times/times";
@@ -47,22 +48,24 @@ export default defineComponent({
 	},
 
 	setup(props) {
+		const i18n = useI18n();
+
 		const keepCycles = computed(() => props.cycles - props.remainedCycles);
 		const remainedFormatTime = computed(() => formatTime(props.remained));
 
 		const title = computed(() => {
 			switch (true) {
 				case props.paused:
-					return "states.pause";
+					return i18n.t("states.pause");
 
 				case props.worked:
-					return "states.work";
+					return i18n.t("states.work");
 
 				case props.rested:
-					return "states.rest";
+					return i18n.t("states.rest");
 
 				default:
-					return "states.prepare";
+					return i18n.t("states.prepare");
 			}
 		});
 

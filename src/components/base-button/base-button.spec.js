@@ -1,14 +1,11 @@
-import { shallowMount } from "@vue/test-utils";
+import { mount } from "@vue/test-utils";
 
 import BaseButton from "@/components/base-button/base-button.vue";
 
 describe("BaseButton.vue", () => {
 	it("render with text", () => {
 		const text = "message";
-		const wrapper = shallowMount(BaseButton, {
-			propsData: {
-				onClick: () => {},
-			},
+		const wrapper = mount(BaseButton, {
 			slots: {
 				default: text,
 			},
@@ -18,20 +15,15 @@ describe("BaseButton.vue", () => {
 	});
 
 	it("simple render", () => {
-		const wrapper = shallowMount(BaseButton, {
-			propsData: {
-				onClick: () => {},
-			},
-		});
+		const wrapper = mount(BaseButton);
 
 		expect(wrapper.attributes().class).toMatch("button");
 	});
 
 	it("render gray button", () => {
-		const wrapper = shallowMount(BaseButton, {
-			propsData: {
+		const wrapper = mount(BaseButton, {
+			props: {
 				isGray: true,
-				onClick: () => {},
 			},
 		});
 
