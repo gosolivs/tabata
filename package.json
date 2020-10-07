@@ -6,11 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
-    "lint:write": "prettier --write src/**/*.{js,vue}",
     "spell": "yaspeller src/locales/*.json",
-    "test:unit": "vue-cli-service test:unit",
-    "test": "yarn run spell && yarn run lint && yarn run test:unit"
+    "test": "vue-cli-service test:unit"
   },
   "dependencies": {
     "vue": "^3.0.0-0",
