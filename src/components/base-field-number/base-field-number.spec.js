@@ -1,6 +1,6 @@
 import { shallowMount } from "@vue/test-utils";
 
-import BaseFieldNumber from "@/components/BaseFieldNumber/BaseFieldNumber";
+import BaseFieldNumber from "@/components/base-field-number/base-field-number";
 
 const defaultProps = {
 	value: 10,

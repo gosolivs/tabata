@@ -1,7 +1,7 @@
 import { shallowMount } from "@vue/test-utils";
 
-import HomeTimeInfo from "@/components/HomeTimeInfo/HomeTimeInfo";
-import { formatTime } from "@/filters/times/times";
+import HomeTimeInfo from "@/components/home-time-info/home-time-info";
+import { formatTime } from "@/libs/serializers/times/times";
 
 const defaultProps = {
 	prepare: 2,

@@ -1,7 +1,7 @@
 import { shallowMount } from "@vue/test-utils";
 
-import HomeTimer from "@/components/HomeTimer/HomeTimer";
-import { formatTime } from "@/filters/times/times";
+import HomeTimer from "@/components/home-timer/home-timer";
+import { formatTime } from "@/libs/serializers/times/times";
 
 const defaultProps = {
 	remained: 20,

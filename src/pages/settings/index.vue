@@ -50,12 +50,12 @@ import {
 	CHANGE_WORK,
 	CHANGE_CYCLES,
 } from "@/store/actions.type";
-import { State } from "@/store";
+import { State } from "@/store/store";
 
 import { pages } from "@/router/pages";
 
-import BaseButton from "@/components/BaseButton/BaseButton.vue";
-import BaseFieldNumber from "@/components/BaseFieldNumber/BaseFieldNumber.vue";
+import BaseButton from "@/components/base-button/base-button.vue";
+import BaseFieldNumber from "@/components/base-field-number/base-field-number.vue";
 
 export default defineComponent({
 	name: "Settings",

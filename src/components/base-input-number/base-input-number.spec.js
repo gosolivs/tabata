@@ -1,6 +1,6 @@
 import { shallowMount } from "@vue/test-utils";
 
-import BaseInputNumber from "@/components/BaseInputNumber/BaseInputNumber";
+import BaseInputNumber from "@/components/base-input-number/base-input-number";
 
 const defaultProps = {
 	value: 10,

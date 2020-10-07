@@ -1,6 +1,6 @@
 import { shallowMount } from "@vue/test-utils";
 
-import BaseButton from "@/components/BaseButton/BaseButton.vue";
+import BaseButton from "@/components/base-button/base-button.vue";
 
 describe("BaseButton.vue", () => {
 	it("render with text", () => {

@@ -1,10 +1,10 @@
 import { createApp } from "vue";
 
-import App from "@/App.vue";
-import { store } from "@/store";
-import { router } from "@/router";
-import { locales } from "@/locales";
+import App from "@/layouts/app.vue";
+import { store } from "@/store/store";
+import { router } from "@/router/router";
+import { locales } from "@/locales/locales";
 
-import "./styles/global.css";
+import "@/assets/styles/global.css";
 
 createApp(App).use(locales).use(router).use(store).mount("#app");

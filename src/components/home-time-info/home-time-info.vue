@@ -23,7 +23,7 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 
-import { formatTime } from "@/filters/times/times";
+import { formatTime } from "@/libs/serializers/times/times";
 
 export default defineComponent({
 	name: "HomeTimeInfo",

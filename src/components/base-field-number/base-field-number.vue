@@ -17,7 +17,7 @@
 <script lang="ts">
 import { defineComponent, computed, SetupContext } from "vue";
 
-import BaseInputNumber from "@/components/BaseInputNumber/BaseInputNumber.vue";
+import BaseInputNumber from "@/components/base-input-number/base-input-number.vue";
 
 export default defineComponent({
 	name: "BaseFieldNumber",

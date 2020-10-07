@@ -1,6 +1,6 @@
 import { createStore } from "vuex";
 
-import { getStorage, setStorage } from "@/utils/storage";
+import { getStorage, setStorage } from "@/libs/storage/storage";
 
 import {
 	CHANGE_PREPARE,

@@ -9,8 +9,8 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 
-import HomeTimerCycles from "@/components/HomeTimerCycles/HomeTimerCycles.vue";
-import { formatTime } from "@/filters/times/times";
+import HomeTimerCycles from "@/components/home-timer-cycles/home-timer-cycles.vue";
+import { formatTime } from "@/libs/serializers/times/times";
 
 export default defineComponent({
 	name: "HomeTimer",

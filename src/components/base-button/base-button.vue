@@ -20,7 +20,7 @@ export default defineComponent({
 	setup(props, { emit }: SetupContext<["click"]>) {
 		const classes = computed(() => ({
 			button: true,
-			"button_gray": props.isGray,
+			button_gray: props.isGray,
 		}));
 
 		const handleClick = () => emit("click");

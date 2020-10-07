@@ -1,6 +1,6 @@
 import { shallowMount } from "@vue/test-utils";
 
-import HomeTimerCycles from "@/components/HomeTimerCycles/HomeTimerCycles";
+import HomeTimerCycles from "@/components/home-timer-cycles/home-timer-cycles";
 
 describe("HomeTimerCycles.vue", () => {
 	it("simple render", () => {

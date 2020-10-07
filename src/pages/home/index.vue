@@ -48,9 +48,9 @@ import { mapState } from "vuex";
 
 import { pages } from "@/router/pages";
 
-import BaseButton from "@/components/BaseButton/BaseButton.vue";
-import HomeTimeInfo from "@/components/HomeTimeInfo/HomeTimeInfo.vue";
-import HomeTimer from "@/components/HomeTimer/HomeTimer.vue";
+import BaseButton from "@/components/base-button/base-button.vue";
+import HomeTimeInfo from "@/components/home-time-info/home-time-info.vue";
+import HomeTimer from "@/components/home-timer/home-timer.vue";
 
 export default defineComponent({
 	name: "Home",
@@ -79,9 +79,9 @@ export default defineComponent({
 		classes(): Record<string, boolean> {
 			return {
 				home: true,
-				"home_start": this.started || this.paused,
-				"home_work": this.started && !this.paused && this.worked,
-				"home_rest": this.started && !this.paused && this.rested,
+				home_start: this.started || this.paused,
+				home_work: this.started && !this.paused && this.worked,
+				home_rest: this.started && !this.paused && this.rested,
 			};
 		},
 	},
