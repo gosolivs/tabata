@@ -20,23 +20,23 @@
 			/>
 
 			<div v-if="!started" class="home__controls">
-				<base-button :on-click="clickSettings">
+				<base-button @click="clickSettings">
 					{{ $t("actions.settings") }}
 				</base-button>
-				<base-button :on-click="clickStart">
+				<base-button @click="clickStart">
 					{{ $t("actions.start") }}
 				</base-button>
 			</div>
 
 			<div v-if="started" class="home__controls">
-				<base-button v-if="!paused" :on-click="clickTogglePause" is-gray>
+				<base-button v-if="!paused" is-gray @click="clickTogglePause">
 					{{ $t("actions.pause") }}
 				</base-button>
-				<base-button v-if="paused" :on-click="clickTogglePause">
+				<base-button v-if="paused" @click="clickTogglePause">
 					{{ $t("actions.resume") }}
 				</base-button>
 
-				<base-button :on-click="clickStop">
+				<base-button @click="clickStop">
 					{{ $t("actions.stop") }}
 				</base-button>
 			</div>

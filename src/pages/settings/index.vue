@@ -4,32 +4,34 @@
 			<h1 class="settings__title">{{ $t("settings.title") }}</h1>
 
 			<div class="settings__main">
-				<div class="settings__field">
-					<base-field-number v-model="prepare">
+				<base-field class="settings__field">
+					<template #label>
 						{{ $t("states.prepare")
 						}}<span class="settings__note">, {{ $t("time_unit") }}</span>
-					</base-field-number>
-				</div>
+					</template>
+					<base-input-number v-model="prepare" />
+				</base-field>
 
-				<div class="settings__field">
-					<base-field-number v-model="rest">
+				<base-field class="settings__field">
+					<template #label>
 						{{ $t("states.rest")
 						}}<span class="settings__note">, {{ $t("time_unit") }}</span>
-					</base-field-number>
-				</div>
+					</template>
+					<base-input-number v-model="rest" />
+				</base-field>
 
-				<div class="settings__field">
-					<base-field-number v-model="work">
+				<base-field class="settings__field">
+					<template #label>
 						{{ $t("states.work")
 						}}<span class="settings__note">, {{ $t("time_unit") }}</span>
-					</base-field-number>
-				</div>
+					</template>
+					<base-input-number v-model="work" />
+				</base-field>
 
-				<div class="settings__field">
-					<base-field-number v-model="cycles">
-						{{ $t("settings.cycles") }}
-					</base-field-number>
-				</div>
+				<base-field class="settings__field">
+					<template #label>{{ $t("settings.cycles") }}</template>
+					<base-input-number v-model="cycles" />
+				</base-field>
 			</div>
 
 			<div class="settings__controls">
@@ -45,7 +47,8 @@ import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
 import BaseButton from "@/components/base-button/base-button.vue";
-import BaseFieldNumber from "@/components/base-field-number/base-field-number.vue";
+import BaseField from "@/components/base-field/base-field.vue";
+import BaseInputNumber from "@/components/base-input-number/base-input-number.vue";
 import { pages } from "@/router/pages";
 import {
 	CHANGE_PREPARE,
@@ -60,7 +63,8 @@ export default defineComponent({
 
 	components: {
 		BaseButton,
-		BaseFieldNumber,
+		BaseField,
+		BaseInputNumber,
 	},
 
 	setup() {

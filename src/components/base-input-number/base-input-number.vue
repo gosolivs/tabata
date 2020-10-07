@@ -4,6 +4,7 @@
 		type="number"
 		:maxlength="maxlength"
 		autocomplete="off"
+		class="base-input-number"
 		@keyup="handleKeyup"
 		@keydown="handleKeydown"
 		@blur="handleBlur"
@@ -178,3 +179,23 @@ export default defineComponent({
 	},
 });
 </script>
+
+<style>
+.base-input-number {
+	border: none;
+	border-bottom: 1px solid currentColor;
+	font-size: 16px;
+	display: block;
+	box-sizing: border-box;
+	padding: 3px 0;
+	width: 100%;
+	background: #fff;
+	transition: 0.2s;
+}
+
+.base-input-number:focus {
+	outline: none;
+	background: #eee;
+	border-bottom-color: #2196f3;
+}
+</style>
