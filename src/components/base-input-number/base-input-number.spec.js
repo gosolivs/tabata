@@ -12,23 +12,23 @@ describe("BaseInputNumber.vue", () => {
 			props: defaultProps,
 		});
 
-		const attrs = wrapper.find("input").attributes();
-		expect(attrs.type).toEqual("number");
-		expect(attrs.autocomplete).toEqual("off");
+		const attributes = wrapper.find("input").attributes();
+		expect(attributes.type).toEqual("number");
+		expect(attributes.autocomplete).toEqual("off");
 	});
 
 	it("watch quantity", async () => {
-		const newValue = 20;
+		const testValue = 20;
 
 		const wrapper = mount(BaseInputNumber, {
 			props: defaultProps,
 		});
 
-		wrapper.vm.quantity = newValue;
+		wrapper.vm.quantity = testValue;
 		await wrapper.setProps({});
 
-		expect(wrapper.vm.oldValue).toBe(newValue);
-		expect(wrapper.vm.quantity).toBe(newValue);
+		expect(wrapper.vm.oldValue).toBe(testValue);
+		expect(wrapper.vm.quantity).toBe(testValue);
 	});
 
 	it("watch min props", async () => {
@@ -66,50 +66,50 @@ describe("BaseInputNumber.vue", () => {
 	});
 
 	it("increment", () => {
-		const props = {
+		const properties = {
 			modelValue: 15,
 			min: 10,
 			max: 16,
 		};
 
 		const wrapper = mount(BaseInputNumber, {
-			props: props,
+			props: properties,
 		});
 
 		wrapper.trigger("keydown.up");
-		expect(wrapper.vm.quantity).toEqual(props.modelValue + 1);
+		expect(wrapper.vm.quantity).toEqual(properties.modelValue + 1);
 
 		wrapper.trigger("keydown.up");
-		expect(wrapper.vm.quantity).toEqual(props.max);
+		expect(wrapper.vm.quantity).toEqual(properties.max);
 
 		wrapper.vm.quantity = 0;
 		wrapper.trigger("keydown.up");
-		expect(wrapper.vm.quantity).toEqual(props.min);
+		expect(wrapper.vm.quantity).toEqual(properties.min);
 	});
 
 	it("decrement", () => {
-		const props = {
+		const properties = {
 			modelValue: 15,
 			min: 14,
 		};
 
 		const wrapper = mount(BaseInputNumber, {
-			props: props,
+			props: properties,
 		});
 
 		wrapper.trigger("keydown.down");
-		expect(wrapper.vm.quantity).toEqual(props.modelValue - 1);
+		expect(wrapper.vm.quantity).toEqual(properties.modelValue - 1);
 
 		wrapper.trigger("keydown.down");
-		expect(wrapper.vm.quantity).toEqual(props.min);
+		expect(wrapper.vm.quantity).toEqual(properties.min);
 
 		wrapper.vm.quantity = 0;
 		wrapper.trigger("keydown.down");
-		expect(wrapper.vm.quantity).toEqual(props.min);
+		expect(wrapper.vm.quantity).toEqual(properties.min);
 	});
 
 	it("method onBlur", () => {
-		const props = {
+		const properties = {
 			min: 4,
 			modelValue: 5,
 			max: 6,
@@ -117,23 +117,23 @@ describe("BaseInputNumber.vue", () => {
 		};
 
 		const wrapper = mount(BaseInputNumber, {
-			props: props,
+			props: properties,
 		});
 
 		const input = wrapper.find("input").element;
 		input.focus();
 		input.blur();
-		expect(wrapper.vm.quantity).toEqual(props.modelValue);
+		expect(wrapper.vm.quantity).toEqual(properties.modelValue);
 
-		wrapper.vm.quantity = props.min - 10;
+		wrapper.vm.quantity = properties.min - 10;
 		input.focus();
 		input.blur();
-		expect(wrapper.vm.quantity).toEqual(props.min);
+		expect(wrapper.vm.quantity).toEqual(properties.min);
 
-		wrapper.vm.quantity = props.max + 10;
+		wrapper.vm.quantity = properties.max + 10;
 		input.focus();
 		input.blur();
-		expect(wrapper.vm.quantity).toEqual(props.max);
+		expect(wrapper.vm.quantity).toEqual(properties.max);
 
 		wrapper.vm.quantity = "";
 		input.focus();
@@ -178,15 +178,15 @@ describe("BaseInputNumber.vue", () => {
 	});
 
 	it("check mounted", () => {
-		const props = {
+		const properties = {
 			min: 2,
 			modelValue: 1,
 		};
 
 		const wrapper = mount(BaseInputNumber, {
-			props: props,
+			props: properties,
 		});
 
-		expect(wrapper.vm.quantity).toEqual(props.min);
+		expect(wrapper.vm.quantity).toEqual(properties.min);
 	});
 });

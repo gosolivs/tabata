@@ -1,9 +1,9 @@
 import { createApp } from "vue";
 
 import App from "@/layouts/app.vue";
-import { store } from "@/store/store";
-import { router } from "@/router/router";
 import { locales } from "@/locales/locales";
+import { router } from "@/router/router";
+import { store } from "@/store/store";
 
 import "@/assets/styles/global.css";
 

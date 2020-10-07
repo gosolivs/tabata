@@ -1,9 +1,9 @@
 <template>
 	<input
+		v-model.number="quantity"
 		type="number"
 		:maxlength="maxlength"
 		autocomplete="off"
-		v-model.number="quantity"
 		@keyup="handleKeyup"
 		@keydown="handleKeydown"
 		@blur="handleBlur"
@@ -38,6 +38,8 @@ export default defineComponent({
 			default: 4,
 		},
 	},
+
+	emits: ["update:modelValue"],
 
 	data: ({ modelValue }) => ({
 		quantity: modelValue,
@@ -149,7 +151,7 @@ export default defineComponent({
 			// Allow these keys only:
 			if (
 				// backspace, delete, tab, escape, enter
-				[46, 8, 9, 27, 13].indexOf(event.keyCode) >= 0 ||
+				[46, 8, 9, 27, 13].includes(event.keyCode) ||
 				// Ctrl/cmd+A
 				(event.keyCode === 65 && (event.ctrlKey || event.metaKey)) ||
 				// Ctrl/cmd+C

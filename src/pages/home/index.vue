@@ -12,31 +12,33 @@
 			<home-timer
 				v-if="started"
 				:remained="remained"
-				:remainedCycles="remainedCycles"
+				:remained-cycles="remainedCycles"
 				:cycles="cycles"
 				:worked="worked"
 				:rested="rested"
 				:paused="paused"
 			/>
 
-			<div class="home__controls" v-if="!started">
-				<base-button :onClick="clickSettings">{{
-					$t("actions.settings")
-				}}</base-button>
-				<base-button :onClick="clickStart">{{
-					$t("actions.start")
-				}}</base-button>
+			<div v-if="!started" class="home__controls">
+				<base-button :on-click="clickSettings">
+					{{ $t("actions.settings") }}
+				</base-button>
+				<base-button :on-click="clickStart">
+					{{ $t("actions.start") }}
+				</base-button>
 			</div>
 
-			<div class="home__controls" v-if="started">
-				<base-button :onClick="clickTogglePause" isGray v-if="!paused">
+			<div v-if="started" class="home__controls">
+				<base-button v-if="!paused" :on-click="clickTogglePause" is-gray>
 					{{ $t("actions.pause") }}
 				</base-button>
-				<base-button :onClick="clickTogglePause" v-if="paused">
+				<base-button v-if="paused" :on-click="clickTogglePause">
 					{{ $t("actions.resume") }}
 				</base-button>
 
-				<base-button :onClick="clickStop">{{ $t("actions.stop") }}</base-button>
+				<base-button :on-click="clickStop">
+					{{ $t("actions.stop") }}
+				</base-button>
 			</div>
 		</div>
 	</div>
@@ -46,11 +48,10 @@
 import { defineComponent } from "vue";
 import { mapState } from "vuex";
 
-import { pages } from "@/router/pages";
-
 import BaseButton from "@/components/base-button/base-button.vue";
 import HomeTimeInfo from "@/components/home-time-info/home-time-info.vue";
 import HomeTimer from "@/components/home-timer/home-timer.vue";
+import { pages } from "@/router/pages";
 
 export default defineComponent({
 	name: "Home",

@@ -48,12 +48,14 @@ export default defineComponent({
 		},
 	},
 
-	setup(props) {
+	setup(properties) {
 		const i18n = useI18n();
 
 		const total = computed(
 			() =>
-				props.prepare + props.rest * props.cycles + props.work * props.cycles,
+				properties.prepare +
+				properties.rest * properties.cycles +
+				properties.work * properties.cycles,
 		);
 
 		const totalFormatTime = computed(() => formatTime(total.value));

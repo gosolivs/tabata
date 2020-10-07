@@ -47,21 +47,23 @@ export default defineComponent({
 		},
 	},
 
-	setup(props) {
+	setup(properties) {
 		const i18n = useI18n();
 
-		const keepCycles = computed(() => props.cycles - props.remainedCycles);
-		const remainedFormatTime = computed(() => formatTime(props.remained));
+		const keepCycles = computed(
+			() => properties.cycles - properties.remainedCycles,
+		);
+		const remainedFormatTime = computed(() => formatTime(properties.remained));
 
 		const title = computed(() => {
 			switch (true) {
-				case props.paused:
+				case properties.paused:
 					return i18n.t("states.pause");
 
-				case props.worked:
+				case properties.worked:
 					return i18n.t("states.work");
 
-				case props.rested:
+				case properties.rested:
 					return i18n.t("states.rest");
 
 				default:

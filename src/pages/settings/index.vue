@@ -41,9 +41,12 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 
+import BaseButton from "@/components/base-button/base-button.vue";
+import BaseFieldNumber from "@/components/base-field-number/base-field-number.vue";
+import { pages } from "@/router/pages";
 import {
 	CHANGE_PREPARE,
 	CHANGE_REST,
@@ -51,11 +54,6 @@ import {
 	CHANGE_CYCLES,
 } from "@/store/actions.type";
 import { State } from "@/store/store";
-
-import { pages } from "@/router/pages";
-
-import BaseButton from "@/components/base-button/base-button.vue";
-import BaseFieldNumber from "@/components/base-field-number/base-field-number.vue";
 
 export default defineComponent({
 	name: "Settings",

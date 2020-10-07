@@ -5,21 +5,23 @@ import { locales } from "@/locales/locales";
 
 describe("HomeTimerCycles.vue", () => {
 	it("simple render", () => {
-		const props = {
+		const properties = {
 			keep: 2,
 			total: 30,
 		};
 
 		const wrapper = mount(HomeTimerCycles, {
-			props: props,
+			props: properties,
 			global: {
 				plugins: [locales],
 			},
 		});
 
-		expect(wrapper.find(".cycles__keep").text()).toEqual(props.keep.toString());
+		expect(wrapper.find(".cycles__keep").text()).toEqual(
+			properties.keep.toString(),
+		);
 		expect(wrapper.find(".cycles__total").text()).toMatch(
-			props.total.toString(),
+			properties.total.toString(),
 		);
 	});
 });

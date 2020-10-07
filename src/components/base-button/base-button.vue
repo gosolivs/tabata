@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, SetupContext } from "vue";
+import { defineComponent, computed } from "vue";
 
 export default defineComponent({
 	name: "BaseButton",
@@ -17,10 +17,12 @@ export default defineComponent({
 		},
 	},
 
-	setup(props, { emit }: SetupContext<["click"]>) {
+	emits: ["click"],
+
+	setup(properties, { emit }) {
 		const classes = computed(() => ({
 			button: true,
-			button_gray: props.isGray,
+			button_gray: properties.isGray,
 		}));
 
 		const handleClick = () => emit("click");

@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import { pages } from "./pages";
-
 import Home from "@/pages/home/index.vue";
 import Settings from "@/pages/settings/index.vue";
+
+import { pages } from "./pages";
 
 export const router = createRouter({
 	history: createWebHistory(

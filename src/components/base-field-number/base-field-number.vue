@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, SetupContext } from "vue";
+import { defineComponent, computed } from "vue";
 
 import BaseInputNumber from "@/components/base-input-number/base-input-number.vue";
 
@@ -33,9 +33,11 @@ export default defineComponent({
 		},
 	},
 
-	setup(props, { emit }: SetupContext<["update:modelValue"]>) {
+	emits: ["update:modelValue"],
+
+	setup(properties, { emit }) {
 		const value = computed({
-			get: () => props.modelValue,
+			get: () => properties.modelValue,
 			set: (value: number) => emit("update:modelValue", value),
 		});
 
