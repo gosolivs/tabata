@@ -1,6 +1,6 @@
 import { formatTime } from "@/libs/serializers/times/times";
 
-describe("times.js", () => {
+describe("times.ts", () => {
 	it("0 seconds", () => {
 		const seconds = 0;
 		expect(formatTime(seconds)).toEqual("00:00");

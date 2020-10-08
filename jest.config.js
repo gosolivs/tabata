@@ -6,11 +6,7 @@ module.exports = {
 		"^.+\\.jsx?$": require.resolve("ts-jest"),
 	},
 
-	testMatch: [
-		"**/tests/unit/**/*.spec.js",
-		"**/__tests__/*.spec.js",
-		"**/*.spec.js",
-	],
+	testMatch: ["**/*.spec.(ts|js)"],
 
 	testURL: "http://localhost/",
 };

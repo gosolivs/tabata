@@ -8,7 +8,7 @@ describe("BaseField.vue", () => {
 
 		const wrapper = mount(BaseField, {
 			slots: {
-				default: label,
+				label,
 			},
 		});
 
