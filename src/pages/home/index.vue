@@ -2,7 +2,7 @@
 	<div :class="classes">
 		<div class="home__wrap">
 			<home-time-info
-				v-if="!started"
+				v-if="!hasStartTimer"
 				:prepare="prepare"
 				:rest="rest"
 				:work="work"
@@ -10,16 +10,14 @@
 			/>
 
 			<home-timer
-				v-if="started"
+				v-if="hasStartTimer"
 				:remained="remained"
 				:remained-cycles="remainedCycles"
 				:cycles="cycles"
-				:worked="worked"
-				:rested="rested"
-				:paused="paused"
+				:state-machine="sm"
 			/>
 
-			<div v-if="!started" class="home__controls">
+			<div v-if="!hasStartTimer" class="home__controls">
 				<base-button @click="clickSettings">
 					{{ $t("actions.settings") }}
 				</base-button>
@@ -28,12 +26,12 @@
 				</base-button>
 			</div>
 
-			<div v-if="started" class="home__controls">
-				<base-button v-if="!paused" is-gray @click="clickTogglePause">
-					{{ $t("actions.pause") }}
-				</base-button>
-				<base-button v-if="paused" @click="clickTogglePause">
+			<div v-if="hasStartTimer" class="home__controls">
+				<base-button v-if="hasPauseTimer" @click="clickTogglePause">
 					{{ $t("actions.resume") }}
+				</base-button>
+				<base-button v-else is-gray @click="clickTogglePause">
+					{{ $t("actions.pause") }}
 				</base-button>
 
 				<base-button @click="clickStop">
@@ -51,6 +49,7 @@ import { mapState } from "vuex";
 import BaseButton from "@/components/base-button/base-button.vue";
 import HomeTimeInfo from "@/components/home-time-info/home-time-info.vue";
 import HomeTimer from "@/components/home-timer/home-timer.vue";
+import { TimerStateMachine, State } from "@/libs/state-machine/timer/timer";
 import { pages } from "@/router/pages";
 
 export default defineComponent({
@@ -63,10 +62,7 @@ export default defineComponent({
 	},
 
 	data: () => ({
-		started: false,
-		paused: false,
-		rested: false,
-		worked: false,
+		sm: new TimerStateMachine(),
 
 		remained: 0,
 		remainedCycles: 0,
@@ -77,26 +73,33 @@ export default defineComponent({
 	computed: {
 		...mapState(["prepare", "rest", "work", "cycles"]),
 
+		hasStartTimer(): boolean {
+			return this.sm.state !== State.init;
+		},
+
+		hasPauseTimer(): boolean {
+			return this.sm.state === State.pause;
+		},
+
 		classes(): Record<string, boolean> {
 			return {
 				home: true,
-				home_start: this.started || this.paused,
-				home_work: this.started && !this.paused && this.worked,
-				home_rest: this.started && !this.paused && this.rested,
+				home_start: this.sm.state !== State.init,
+				home_work: this.sm.state === State.work,
+				home_rest: this.sm.state === State.rest,
 			};
 		},
 	},
 
 	methods: {
 		clickSettings(): void {
-			this.started = false;
-			this.paused = false;
+			this.sm.transition(State.init);
 			this.$router.push({ name: pages.settings });
 		},
 
 		clickStart(): void {
-			this.started = true;
-			this.paused = false;
+			this.sm.transition(State.prepare);
+
 			this.remained = this.prepare;
 			this.remainedCycles = this.cycles;
 
@@ -104,39 +107,35 @@ export default defineComponent({
 		},
 
 		clickStop(): void {
-			this.started = false;
-			this.paused = false;
-			this.worked = false;
-			this.rested = false;
+			this.sm.reset();
 			clearInterval(this.intervalID);
 		},
 
 		clickTogglePause(): void {
-			this.paused = !this.paused;
-
-			if (!this.paused) {
+			if (this.sm.state === State.pause) {
+				this.sm.transition(this.sm.prevState);
 				this.intervalID = setInterval(this.changeTimer.bind(this), 1000);
 			} else {
+				this.sm.transition(State.pause);
 				clearInterval(this.intervalID);
 			}
 		},
 
 		changeTimer(): void {
 			this.remained -= 1;
+			if (this.remained > 0) {
+				return;
+			}
 
-			if (this.remained === 0) {
-				if (this.worked) {
-					this.remained = this.rest;
+			if (this.sm.state === State.work) {
+				this.remained = this.rest;
 
-					this.rested = true;
-					this.worked = false;
-				} else {
-					this.remained = this.work;
-					this.remainedCycles -= 1;
+				this.sm.transition(State.rest);
+			} else {
+				this.remained = this.work;
+				this.remainedCycles -= 1;
 
-					this.rested = false;
-					this.worked = true;
-				}
+				this.sm.transition(State.work);
 			}
 
 			if (this.remainedCycles < 0) {

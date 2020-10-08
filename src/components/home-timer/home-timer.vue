@@ -12,6 +12,7 @@ import { useI18n } from "vue-i18n";
 
 import HomeTimerCycles from "@/components/home-timer-cycles/home-timer-cycles.vue";
 import { formatTime } from "@/libs/serializers/times/times";
+import { TimerStateMachine, State } from "@/libs/state-machine/timer/timer";
 
 export default defineComponent({
 	name: "HomeTimer",
@@ -33,17 +34,10 @@ export default defineComponent({
 			type: Number,
 			required: true,
 		},
-		rested: {
-			type: Boolean,
-			default: false,
-		},
-		worked: {
-			type: Boolean,
-			default: false,
-		},
-		paused: {
-			type: Boolean,
-			default: false,
+
+		stateMachine: {
+			type: TimerStateMachine,
+			required: true,
 		},
 	},
 
@@ -56,18 +50,18 @@ export default defineComponent({
 		const remainedFormatTime = computed(() => formatTime(properties.remained));
 
 		const title = computed(() => {
-			switch (true) {
-				case properties.paused:
-					return i18n.t("states.pause");
+			switch (properties.stateMachine.state) {
+				case State.prepare:
+					return i18n.t("states.prepare");
 
-				case properties.worked:
+				case State.work:
 					return i18n.t("states.work");
 
-				case properties.rested:
+				case State.rest:
 					return i18n.t("states.rest");
 
 				default:
-					return i18n.t("states.prepare");
+					return i18n.t("states.pause");
 			}
 		});
 
