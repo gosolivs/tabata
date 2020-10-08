@@ -56,7 +56,7 @@ import {
 	CHANGE_WORK,
 	CHANGE_CYCLES,
 } from "@/store/actions.type";
-import { State } from "@/store/store";
+import { AppState } from "@/store/store";
 
 export default defineComponent({
 	name: "Settings",
@@ -68,7 +68,7 @@ export default defineComponent({
 	},
 
 	setup() {
-		const store = useStore<State>();
+		const store = useStore<AppState>();
 		const router = useRouter();
 
 		const prepare = computed({

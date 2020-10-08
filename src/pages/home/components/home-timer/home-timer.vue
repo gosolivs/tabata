@@ -1,7 +1,7 @@
 <template>
-	<div class="timer">
-		<div class="timer__title">{{ title }}</div>
-		<div class="timer__remained">{{ remainedFormatTime }}</div>
+	<div class="home-timer">
+		<div class="home-timer__title">{{ title }}</div>
+		<div class="home-timer__remained">{{ remainedFormatTime }}</div>
 		<home-timer-cycles :keep="keepCycles" :total="cycles" />
 	</div>
 </template>
@@ -9,10 +9,13 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import { useI18n } from "vue-i18n";
+import { useStore } from "vuex";
 
-import HomeTimerCycles from "@/components/home-timer-cycles/home-timer-cycles.vue";
 import { formatTime } from "@/libs/serializers/times/times";
 import { TimerStateMachine, State } from "@/libs/state-machine/timer/timer";
+import { AppState } from "@/store/store";
+
+import HomeTimerCycles from "../home-timer-cycles/home-timer-cycles.vue";
 
 export default defineComponent({
 	name: "HomeTimer",
@@ -30,11 +33,6 @@ export default defineComponent({
 			type: Number,
 			required: true,
 		},
-		cycles: {
-			type: Number,
-			required: true,
-		},
-
 		stateMachine: {
 			type: TimerStateMachine,
 			required: true,
@@ -43,9 +41,10 @@ export default defineComponent({
 
 	setup(properties) {
 		const i18n = useI18n();
+		const store = useStore<AppState>();
 
 		const keepCycles = computed(
-			() => properties.cycles - properties.remainedCycles,
+			() => store.state.cycles - properties.remainedCycles,
 		);
 		const remainedFormatTime = computed(() => formatTime(properties.remained));
 
@@ -69,27 +68,28 @@ export default defineComponent({
 			keepCycles,
 			remainedFormatTime,
 			title,
+			cycles: store.state.cycles,
 		};
 	},
 });
 </script>
 
 <style>
-.timer {
+.home-timer {
 }
 
-.timer__title {
+.home-timer__title {
 	font-size: 1.4rem;
 	line-height: 1;
 }
 
-.timer__remained {
+.home-timer__remained {
 	font-size: 7rem;
 	line-height: 1;
 }
 
 @media (max-width: 450px) {
-	.timer {
+	.home-timer {
 		flex: 1 1 auto;
 
 		display: flex;
@@ -99,7 +99,7 @@ export default defineComponent({
 }
 
 @media (max-width: 400px) {
-	.timer__remained {
+	.home-timer__remained {
 		font-size: 5rem;
 	}
 }

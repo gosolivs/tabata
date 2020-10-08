@@ -21,8 +21,8 @@ export default defineComponent({
 
 	setup(properties, { emit }) {
 		const classes = computed(() => ({
-			button: true,
-			button_gray: properties.isGray,
+			"base-button": true,
+			"base-button_gray": properties.isGray,
 		}));
 
 		const handleClick = () => emit("click");
@@ -36,7 +36,7 @@ export default defineComponent({
 </script>
 
 <style>
-.button {
+.base-button {
 	border: none;
 	border-radius: 0;
 	text-decoration: none;
@@ -49,23 +49,23 @@ export default defineComponent({
 	font-size: 14px;
 }
 
-.button:hover,
-.button:focus {
+.base-button:hover,
+.base-button:focus {
 	background: #1976d2;
 }
 
-.button:active {
+.base-button:active {
 	transition: 0s;
 	filter: blur(2px);
 }
 
-.button_gray {
+.base-button_gray {
 	background: #e0e0e0;
 	color: #000;
 }
 
-.button_gray:hover,
-.button_gray:focus {
+.base-button_gray:hover,
+.base-button_gray:focus {
 	background: #d5d5d5;
 }
 </style>

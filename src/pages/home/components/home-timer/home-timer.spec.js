@@ -1,9 +1,10 @@
 import { mount } from "@vue/test-utils";
 
-import HomeTimer from "@/components/home-timer/home-timer";
 import { formatTime } from "@/libs/serializers/times/times";
 import { TimerStateMachine } from "@/libs/state-machine/timer/timer";
 import { locales } from "@/locales/locales";
+import HomeTimer from "@/pages/home/components/home-timer/home-timer";
+import { store } from "@/store/store";
 
 const defaultProps = {
 	remained: 20,
@@ -17,11 +18,11 @@ describe("HomeTimer.vue", () => {
 		const wrapper = mount(HomeTimer, {
 			props: defaultProps,
 			global: {
-				plugins: [locales],
+				plugins: [locales, store],
 			},
 		});
 
 		const keepTime = formatTime(defaultProps.remained);
-		expect(wrapper.find(".timer__remained").text()).toMatch(keepTime);
+		expect(wrapper.find(".home-timer__remained").text()).toMatch(keepTime);
 	});
 });

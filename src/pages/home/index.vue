@@ -1,19 +1,12 @@
 <template>
 	<div :class="classes">
 		<div class="home__wrap">
-			<home-time-info
-				v-if="!hasStartTimer"
-				:prepare="prepare"
-				:rest="rest"
-				:work="work"
-				:cycles="cycles"
-			/>
+			<home-time-info v-if="!hasStartTimer" />
 
 			<home-timer
 				v-if="hasStartTimer"
 				:remained="remained"
 				:remained-cycles="remainedCycles"
-				:cycles="cycles"
 				:state-machine="sm"
 			/>
 
@@ -47,10 +40,11 @@ import { defineComponent } from "vue";
 import { mapState } from "vuex";
 
 import BaseButton from "@/components/base-button/base-button.vue";
-import HomeTimeInfo from "@/components/home-time-info/home-time-info.vue";
-import HomeTimer from "@/components/home-timer/home-timer.vue";
 import { TimerStateMachine, State } from "@/libs/state-machine/timer/timer";
 import { pages } from "@/router/pages";
+
+import HomeTimeInfo from "./components/home-time-info/home-time-info.vue";
+import HomeTimer from "./components/home-timer/home-timer.vue";
 
 export default defineComponent({
 	name: "Home",

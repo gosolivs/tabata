@@ -1,9 +1,9 @@
 <template>
-	<div class="cycles">
-		<div class="cycles__title">{{ title }}:</div>
+	<div class="home-timer-cycles">
+		<div class="home-timer-cycles__title">{{ title }}:</div>
 
-		<span class="cycles__keep">{{ keep }}</span>
-		<span class="cycles__total">/{{ total }}</span>
+		<span class="home-timer-cycles__keep">{{ keep }}</span>
+		<span class="home-timer-cycles__total">/{{ total }}</span>
 	</div>
 </template>
 
@@ -36,20 +36,20 @@ export default defineComponent({
 </script>
 
 <style>
-.cycles {
+.home-timer-cycles {
 	margin: 20px 0;
 }
 
-.cycles__title {
+.home-timer-cycles__title {
 	font-size: 1.4rem;
 	margin-bottom: -0.4rem;
 }
 
-.cycles__keep {
+.home-timer-cycles__keep {
 	font-size: 4rem;
 }
 
-.cycles__total {
+.home-timer-cycles__total {
 	font-size: 2.5rem;
 	color: #444;
 }
