@@ -62,7 +62,6 @@
     }
   },
   "browserslist": [
-    "last 2 versions",
-    "not ie <= 10"
+    "supports es6-module"
   ]
 }
