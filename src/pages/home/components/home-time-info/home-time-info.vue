@@ -72,7 +72,7 @@ export default defineComponent({
 }
 
 .home-time-info__total {
-	margin: 20px 0;
+	margin: var(--offset) 0;
 	font-size: 1.4rem;
 }
 

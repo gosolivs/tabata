@@ -40,18 +40,18 @@ export default defineComponent({
 	border: none;
 	border-radius: 0;
 	text-decoration: none;
-	background: #2196f3;
-	color: #fff;
+	background: var(--brand-color);
+	color: var(--brand-text-color);
 	text-align: center;
 	display: inline-block;
 	padding: 10px;
-	transition: 0.2s;
+	transition: var(--transition-time);
 	font-size: 14px;
 }
 
 .base-button:hover,
 .base-button:focus {
-	background: #1976d2;
+	background: var(--brand-darken-color);
 }
 
 .base-button:active {
@@ -60,12 +60,12 @@ export default defineComponent({
 }
 
 .base-button_gray {
-	background: #e0e0e0;
-	color: #000;
+	background: var(--second-color);
+	color: var(--second-text-color);
 }
 
 .base-button_gray:hover,
 .base-button_gray:focus {
-	background: #d5d5d5;
+	background: var(--second-darken-color);
 }
 </style>

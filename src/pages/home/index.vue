@@ -162,38 +162,38 @@ export default defineComponent({
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	transition: 0.2s;
+	transition: var(--transition-time);
 }
 
 .home_start {
-	background: #eee;
+	background: var(--screen-home-start);
 }
 
 .home_work {
-	background: #f99;
+	background: var(--screen-home-work);
 }
 
 .home_rest {
-	background: #50b98a;
+	background: var(--screen-home-rest);
 }
 
 .home__wrap {
 	width: 100%;
 	max-width: 500px;
-	padding: 20px 15px;
+	padding: var(--offset) var(--offset-small);
 	box-sizing: border-box;
 }
 
 .home__controls {
 	display: flex;
 	flex-wrap: wrap;
-	margin: 0 0 -20px -20px;
+	margin: 0 0 calc(-1 * var(--offset)) calc(-1 * var(--offset));
 }
 
 .home__controls > * {
-	margin: 0 0 20px 20px;
+	margin: 0 0 var(--offset) var(--offset);
 	flex: 1 0 auto;
-	width: calc(50% - 20px);
+	width: calc(50% - var(--offset));
 	min-width: 150px;
 }
 

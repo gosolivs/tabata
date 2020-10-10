@@ -1,3 +1,30 @@
+:root {
+	--text-color: #222;
+
+	--brand-color: #2196f3;
+	--brand-text-color: #fff;
+	--brand-darken-color: #1976d2;
+
+	--second-color: #e0e0e0;
+	--second-text-color: #000;
+	--second-darken-color: #d5d5d5;
+
+	--gray-color: #333;
+
+	--transition-time: 0.2s;
+
+	--offset: 20px;
+	--offset-small: 15px;
+
+	--screen-home-start: #eee;
+	--screen-home-work: #f99;
+	--screen-home-rest: #50b98a;
+
+	--input-background-color: #fff;
+	--input-text-color: var(--text-color);
+	--input-background-focus-color: #eee;
+}
+
 html {
 	-webkit-text-size-adjust: 100%;
 	-webkit-font-smoothing: antialiased;
@@ -8,6 +35,7 @@ html {
 	font-family: system-ui, sans-serif;
 	font-size: 100%;
 	font-weight: 400;
+	color: var(--text-color);
 
 	overflow-x: hidden;
 	height: 100%;

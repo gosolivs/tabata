@@ -115,12 +115,12 @@ export default defineComponent({
 .settings__wrap {
 	width: 100%;
 	max-width: 500px;
-	padding: 20px 15px;
+	padding: var(--offset) var(--offset-small);
 	box-sizing: border-box;
 }
 
 .settings__title {
-	margin: 0 0 15px;
+	margin: 0 0 var(--offset-small);
 	padding: 0;
 	font-weight: 500;
 	font-size: 36px;
@@ -129,18 +129,18 @@ export default defineComponent({
 .settings__main {
 	display: flex;
 	flex-wrap: wrap;
-	margin-left: -20px;
+	margin-left: calc(-1 * var(--offset));
 }
 
 .settings__field {
-	margin: 0 0 20px 20px;
+	margin: 0 0 var(--offset) var(--offset);
 	flex: 1 1 auto;
-	width: calc(50% - 20px);
+	width: calc(50% - var(--offset));
 	min-width: 180px;
 }
 
 .settings__note {
-	color: #333;
+	color: var(--gray-color);
 	font-size: 0.9em;
 }
 

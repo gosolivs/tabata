@@ -37,7 +37,7 @@ export default defineComponent({
 
 <style>
 .home-timer-cycles {
-	margin: 20px 0;
+	margin: var(--offset) 0;
 }
 
 .home-timer-cycles__title {
@@ -51,6 +51,6 @@ export default defineComponent({
 
 .home-timer-cycles__total {
 	font-size: 2.5rem;
-	color: #444;
+	color: var(--gray-color);
 }
 </style>

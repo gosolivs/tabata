@@ -189,13 +189,14 @@ export default defineComponent({
 	box-sizing: border-box;
 	padding: 3px 0;
 	width: 100%;
-	background: #fff;
-	transition: 0.2s;
+	background: var(--input-background-color);
+	color: var(--input-text-color);
+	transition: var(--transition-time);
 }
 
 .base-input-number:focus {
 	outline: none;
-	background: #eee;
-	border-bottom-color: #2196f3;
+	background: var(--input-background-focus-color);
+	border-bottom-color: var(--brand-color);
 }
 </style>
