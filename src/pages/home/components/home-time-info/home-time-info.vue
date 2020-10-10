@@ -25,10 +25,10 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import { useI18n } from "vue-i18n";
 import { useStore } from "vuex";
 
 import { formatTime } from "@/libs/serializers/times/times";
+import { useI18n } from "@/locales/locales";
 import { AppState } from "@/store/store";
 
 export default defineComponent({

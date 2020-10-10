@@ -8,11 +8,11 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import { useI18n } from "vue-i18n";
 import { useStore } from "vuex";
 
 import { formatTime } from "@/libs/serializers/times/times";
 import { TimerStateMachine, State } from "@/libs/state-machine/timer/timer";
+import { useI18n } from "@/locales/locales";
 import { AppState } from "@/store/store";
 
 import HomeTimerCycles from "../home-timer-cycles/home-timer-cycles.vue";

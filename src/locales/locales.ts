@@ -1,17 +1,19 @@
-import { createI18n } from "vue-i18n";
+import { Plugin } from "vue";
 
+import { flattenDictionary } from "./helpers";
 import ru from "./ru.json";
 
-export const locales = (() => {
-	return createI18n({
-		locale:
-			process.env.VUE_APP_I18N_LOCALE != null
-				? process.env.VUE_APP_I18N_LOCALE
-				: "ru",
-		fallbackLocale:
-			process.env.VUE_APP_I18N_FALLBACK_LOCALE != null
-				? process.env.VUE_APP_I18N_FALLBACK_LOCALE
-				: "ru",
-		messages: { ru },
-	});
-})();
+const dictionary = flattenDictionary(ru);
+
+const translator = (key: string): string =>
+	dictionary[key] != null ? dictionary[key] : key;
+
+export const useI18n = () => ({
+	t: translator,
+});
+
+export const localesVuePlugin: Plugin = {
+	install: (app) => {
+		app.config.globalProperties.$t = translator;
+	},
+};
