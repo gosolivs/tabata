@@ -5,29 +5,29 @@
 
 			<home-timer
 				v-if="hasStartTimer"
-				:remained="remained"
-				:remained-cycles="remainedCycles"
+				:remained="remained.time"
+				:remained-cycles="remained.cycles"
 				:state-machine="sm"
 			/>
 
 			<div v-if="!hasStartTimer" class="home__controls">
-				<base-button @click="clickSettings">
+				<base-button @click="handleClickSettings">
 					{{ $t("actions.settings") }}
 				</base-button>
-				<base-button @click="clickStart">
+				<base-button @click="handleClickStart">
 					{{ $t("actions.start") }}
 				</base-button>
 			</div>
 
 			<div v-if="hasStartTimer" class="home__controls">
-				<base-button v-if="hasPauseTimer" @click="clickTogglePause">
+				<base-button v-if="hasPauseTimer" @click="handleClickTogglePause">
 					{{ $t("actions.resume") }}
 				</base-button>
-				<base-button v-else is-gray @click="clickTogglePause">
+				<base-button v-else is-gray @click="handleClickTogglePause">
 					{{ $t("actions.pause") }}
 				</base-button>
 
-				<base-button @click="clickStop">
+				<base-button @click="handleClickStop">
 					{{ $t("actions.stop") }}
 				</base-button>
 			</div>
@@ -36,15 +36,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { mapState } from "vuex";
+import { defineComponent, reactive, computed } from "vue";
+import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 
 import BaseButton from "@/components/base-button/base-button.vue";
 import { TimerStateMachine, State } from "@/libs/state-machine/timer/timer";
 import { pages } from "@/router/pages";
+import { AppState } from "@/store/store";
 
 import HomeTimeInfo from "./components/home-time-info/home-time-info.vue";
 import HomeTimer from "./components/home-timer/home-timer.vue";
+
+const TIMER_CHECK_INTERVAL = 1_000;
 
 export default defineComponent({
 	name: "Home",
@@ -55,87 +59,99 @@ export default defineComponent({
 		HomeTimer,
 	},
 
-	data: () => ({
-		sm: new TimerStateMachine(),
+	setup() {
+		const router = useRouter();
+		const store = useStore<AppState>();
+		const { prepare, rest, work, cycles } = store.state;
 
-		remained: 0,
-		remainedCycles: 0,
+		let intervalID: number | undefined;
 
-		intervalID: 0,
-	}),
+		const sm = reactive(new TimerStateMachine());
+		const remained = reactive({
+			time: 0,
+			cycles: 0,
+		});
 
-	computed: {
-		...mapState(["prepare", "rest", "work", "cycles"]),
+		const hasStartTimer = computed(() => sm.state !== State.init);
+		const hasPauseTimer = computed(() => sm.state === State.pause);
+		const classes = computed(() => ({
+			home: true,
+			home_start: sm.state !== State.init,
+			home_work: sm.state === State.work,
+			home_rest: sm.state === State.rest,
+		}));
 
-		hasStartTimer(): boolean {
-			return this.sm.state !== State.init;
-		},
-
-		hasPauseTimer(): boolean {
-			return this.sm.state === State.pause;
-		},
-
-		classes(): Record<string, boolean> {
-			return {
-				home: true,
-				home_start: this.sm.state !== State.init,
-				home_work: this.sm.state === State.work,
-				home_rest: this.sm.state === State.rest,
-			};
-		},
-	},
-
-	methods: {
-		clickSettings(): void {
-			this.sm.transition(State.init);
-			this.$router.push({ name: pages.settings });
-		},
-
-		clickStart(): void {
-			this.sm.transition(State.prepare);
-
-			this.remained = this.prepare;
-			this.remainedCycles = this.cycles;
-
-			this.intervalID = setInterval(this.changeTimer.bind(this), 1000);
-		},
-
-		clickStop(): void {
-			this.sm.reset();
-			clearInterval(this.intervalID);
-		},
-
-		clickTogglePause(): void {
-			if (this.sm.state === State.pause) {
-				this.sm.transition(this.sm.prevState);
-				this.intervalID = setInterval(this.changeTimer.bind(this), 1000);
-			} else {
-				this.sm.transition(State.pause);
-				clearInterval(this.intervalID);
-			}
-		},
-
-		changeTimer(): void {
-			this.remained -= 1;
-			if (this.remained > 0) {
+		function changeTimer(): void {
+			remained.time -= 1;
+			if (remained.time > 0) {
 				return;
 			}
 
-			if (this.sm.state === State.work) {
-				this.remained = this.rest;
-
-				this.sm.transition(State.rest);
-			} else {
-				this.remained = this.work;
-				this.remainedCycles -= 1;
-
-				this.sm.transition(State.work);
+			if (sm.state === State.work) {
+				remained.time = rest;
+				sm.transition(State.rest);
+				return;
 			}
 
-			if (this.remainedCycles < 0) {
-				this.clickStop();
+			remained.time = work;
+			remained.cycles -= 1;
+
+			sm.transition(State.work);
+
+			if (remained.cycles < 0) {
+				resetTimer();
 			}
-		},
+		}
+
+		function startTimer(): void {
+			intervalID = setInterval(changeTimer, TIMER_CHECK_INTERVAL);
+		}
+
+		function stopTimer(): void {
+			clearInterval(intervalID);
+		}
+
+		function resetTimer(): void {
+			sm.reset();
+			stopTimer();
+		}
+
+		const handleClickSettings = () => {
+			sm.transition(State.init);
+			router.push({ name: pages.settings });
+		};
+		const handleClickStart = () => {
+			sm.transition(State.prepare);
+
+			remained.time = prepare;
+			remained.cycles = cycles;
+
+			startTimer();
+		};
+		const handleClickTogglePause = () => {
+			if (sm.state === State.pause) {
+				sm.transition(sm.prevState);
+				startTimer();
+				return;
+			}
+
+			sm.transition(State.pause);
+			stopTimer();
+		};
+
+		return {
+			sm,
+			remained,
+
+			hasStartTimer,
+			hasPauseTimer,
+			classes,
+
+			handleClickSettings,
+			handleClickStart,
+			handleClickStop: resetTimer,
+			handleClickTogglePause,
+		};
 	},
 });
 </script>
