@@ -8,12 +8,11 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import { useStore } from "vuex";
 
 import { formatTime } from "@/libs/serializers/times/times";
 import { TimerStateMachine, State } from "@/libs/state-machine/timer/timer";
 import { useI18n } from "@/locales/locales";
-import { AppState } from "@/store/store";
+import { useStore } from "@/store/store";
 
 import HomeTimerCycles from "../home-timer-cycles/home-timer-cycles.vue";
 
@@ -41,7 +40,7 @@ export default defineComponent({
 
 	setup(properties) {
 		const i18n = useI18n();
-		const store = useStore<AppState>();
+		const store = useStore();
 
 		const keepCycles = computed(
 			() => store.state.cycles - properties.remainedCycles,

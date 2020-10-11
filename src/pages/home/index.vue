@@ -38,12 +38,11 @@
 <script lang="ts">
 import { defineComponent, reactive, computed } from "vue";
 import { useRouter } from "vue-router";
-import { useStore } from "vuex";
 
 import BaseButton from "@/components/base-button/base-button.vue";
 import { TimerStateMachine, State } from "@/libs/state-machine/timer/timer";
 import { pages } from "@/router/pages";
-import { AppState } from "@/store/store";
+import { useStore } from "@/store/store";
 
 import HomeTimeInfo from "./components/home-time-info/home-time-info.vue";
 import HomeTimer from "./components/home-timer/home-timer.vue";
@@ -61,7 +60,7 @@ export default defineComponent({
 
 	setup() {
 		const router = useRouter();
-		const store = useStore<AppState>();
+		const store = useStore();
 		const { prepare, rest, work, cycles } = store.state;
 
 		let intervalID: number | undefined;

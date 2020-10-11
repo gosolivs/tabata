@@ -8943,6 +8943,11 @@ stealthy-require@^1.1.1:
   resolved "https://registry.npmjs.org/stealthy-require/-/stealthy-require-1.1.1.tgz#35b09875b4ff49f26a777e509b3090a3226bf24b"
   integrity sha1-NbCYdbT/SfJqd35QmzCQoyJr8ks=
 
+storeon@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.npmjs.org/storeon/-/storeon-3.0.4.tgz#8f8b1dcb136368f9ed4548f755142553a27232a7"
+  integrity sha512-HywDfpxuQhccknxXo8EyiiZmOvH4MqkrJfNS0K1x+funv0pQKefZOGyD78HjFh/BUjQe9BnJ//oB7SD2J4Vy6A==
+
 stream-browserify@^2.0.1:
   version "2.0.2"
   resolved "https://registry.npmjs.org/stream-browserify/-/stream-browserify-2.0.2.tgz#87521d38a44aa7ee91ce1cd2a47df0cb49dd660b"
@@ -9867,11 +9872,6 @@ vue@^3.0.0-0:
     "@vue/compiler-dom" "3.0.0"
     "@vue/runtime-dom" "3.0.0"
     "@vue/shared" "3.0.0"
-
-vuex@^4.0.0-0:
-  version "4.0.0-beta.4"
-  resolved "https://registry.npmjs.org/vuex/-/vuex-4.0.0-beta.4.tgz#7b319ead2ef30432b7eaa4e37258ea3c5e44f698"
-  integrity sha512-/+4E1dokq5cwbl4mohOqOj8h0vOLOWmLSqlqTf++bfmN9/JKWtwYfsBrzlK0sYrNfuYcpQeX0BVxQHoHXDfYZQ==
 
 w3c-hr-time@^1.0.1:
   version "1.0.2"

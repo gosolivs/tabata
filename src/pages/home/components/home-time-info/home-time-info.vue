@@ -25,17 +25,16 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import { useStore } from "vuex";
 
 import { formatTime } from "@/libs/serializers/times/times";
 import { useI18n } from "@/locales/locales";
-import { AppState } from "@/store/store";
+import { useStore } from "@/store/store";
 
 export default defineComponent({
 	name: "HomeTimeInfo",
 
 	setup() {
-		const store = useStore<AppState>();
+		const store = useStore();
 		const i18n = useI18n();
 
 		const total = computed(

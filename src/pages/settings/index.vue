@@ -42,21 +42,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { computed, defineComponent } from "vue";
 import { useRouter } from "vue-router";
-import { useStore } from "vuex";
 
 import BaseButton from "@/components/base-button/base-button.vue";
 import BaseField from "@/components/base-field/base-field.vue";
 import BaseInputNumber from "@/components/base-input-number/base-input-number.vue";
 import { pages } from "@/router/pages";
-import {
-	CHANGE_PREPARE,
-	CHANGE_REST,
-	CHANGE_WORK,
-	CHANGE_CYCLES,
-} from "@/store/actions.type";
-import { AppState } from "@/store/store";
+import { Actions, useStore } from "@/store/store";
 
 export default defineComponent({
 	name: "Settings",
@@ -68,27 +61,27 @@ export default defineComponent({
 	},
 
 	setup() {
-		const store = useStore<AppState>();
+		const store = useStore();
 		const router = useRouter();
 
 		const prepare = computed({
 			get: () => store.state.prepare,
-			set: (value: number) => store.commit(CHANGE_PREPARE, value),
+			set: (value: number) => store.dispatch(Actions.changePrepare, value),
 		});
 
 		const rest = computed({
 			get: () => store.state.rest,
-			set: (value: number) => store.commit(CHANGE_REST, value),
+			set: (value: number) => store.dispatch(Actions.changeRest, value),
 		});
 
 		const work = computed({
 			get: () => store.state.work,
-			set: (value: number) => store.commit(CHANGE_WORK, value),
+			set: (value: number) => store.dispatch(Actions.changeWork, value),
 		});
 
 		const cycles = computed({
 			get: () => store.state.cycles,
-			set: (value: number) => store.commit(CHANGE_CYCLES, value),
+			set: (value: number) => store.dispatch(Actions.changeCycles, value),
 		});
 
 		const handleSave = () => router.push({ name: pages.home });

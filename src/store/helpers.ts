@@ -1,7 +1,4 @@
-export type Range = {
-	min: number;
-	max: number;
-};
+import { Range } from "./types";
 
 export function checkRange(value: number, range: Range): number {
 	switch (true) {
