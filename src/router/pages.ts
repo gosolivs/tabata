@@ -4,6 +4,12 @@ export enum pages {
 }
 
 export const paths: Record<pages, string> = {
-	[pages.home]: "/",
-	[pages.settings]: "/settings/",
+	[pages.home]: getBasePath("/"),
+	[pages.settings]: getBasePath("/settings/"),
 };
+
+function getBasePath(path: string): string {
+	return [process.env.NODE_ENV === "production" ? "/tabata/" : "/", path]
+		.join("/")
+		.replace(/\/{2,}/g, "/");
+}
