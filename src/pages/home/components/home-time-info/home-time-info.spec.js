@@ -1,9 +1,7 @@
 import { mount } from "@vue/test-utils";
 
 import { formatTime } from "@/libs/serializers/times/times";
-import { locales } from "@/locales/locales";
 import HomeTimeInfo from "@/pages/home/components/home-time-info/home-time-info";
-import { store } from "@/store/store";
 
 const defaultProps = {
 	prepare: 2,
@@ -16,9 +14,6 @@ describe("HomeTimeInfo.vue", () => {
 	it("props render", () => {
 		const wrapper = mount(HomeTimeInfo, {
 			props: defaultProps,
-			global: {
-				plugins: [locales, store],
-			},
 		});
 
 		const allItems = wrapper.findAll(".home-time-info__item");
@@ -35,9 +30,6 @@ describe("HomeTimeInfo.vue", () => {
 
 		const wrapper = mount(HomeTimeInfo, {
 			props: defaultProps,
-			global: {
-				plugins: [locales, store],
-			},
 		});
 
 		expect(wrapper.find(".home-time-info__duration").text()).toEqual(

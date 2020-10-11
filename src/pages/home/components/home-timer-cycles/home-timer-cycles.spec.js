@@ -1,6 +1,5 @@
 import { mount } from "@vue/test-utils";
 
-import { locales } from "@/locales/locales";
 import HomeTimerCycles from "@/pages/home/components/home-timer-cycles/home-timer-cycles";
 
 describe("HomeTimerCycles.vue", () => {
@@ -12,9 +11,6 @@ describe("HomeTimerCycles.vue", () => {
 
 		const wrapper = mount(HomeTimerCycles, {
 			props: properties,
-			global: {
-				plugins: [locales],
-			},
 		});
 
 		expect(wrapper.find(".home-timer-cycles__keep").text()).toEqual(
