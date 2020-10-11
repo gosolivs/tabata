@@ -47,6 +47,7 @@ export default defineComponent({
 	padding: 10px;
 	transition: var(--transition-time);
 	font-size: 14px;
+	cursor: pointer;
 }
 
 .base-button:hover,
