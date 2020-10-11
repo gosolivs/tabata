@@ -1,7 +1,7 @@
 <template>
-	<button :class="classes" @click="handleClick">
+	<component :is="is" :class="classes" @click="handleClick">
 		<slot />
-	</button>
+	</component>
 </template>
 
 <script lang="ts">
@@ -14,6 +14,11 @@ export default defineComponent({
 		isGray: {
 			type: Boolean,
 			default: false,
+		},
+
+		is: {
+			type: String,
+			default: "button",
 		},
 	},
 
@@ -39,6 +44,7 @@ export default defineComponent({
 .base-button {
 	border: none;
 	border-radius: 0;
+	box-sizing: border-box;
 	text-decoration: none;
 	background: var(--brand-color);
 	color: var(--brand-text-color);

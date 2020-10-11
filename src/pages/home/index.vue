@@ -11,7 +11,7 @@
 			/>
 
 			<div v-if="!hasStartTimer" class="home__controls">
-				<base-button @click="handleClickSettings">
+				<base-button is="a" :href="paths.settings" @click="handleClickSettings">
 					{{ i18n.t("actions.settings") }}
 				</base-button>
 				<base-button @click="handleClickStart">
@@ -36,7 +36,6 @@
 </template>
 
 <script lang="ts">
-import { routerNavigate } from "@storeon/router";
 import { defineComponent, reactive, computed } from "vue";
 
 import BaseButton from "@/components/base-button/base-button.vue";
@@ -118,7 +117,6 @@ export default defineComponent({
 
 		const handleClickSettings = () => {
 			sm.transition(State.init);
-			store.dispatch(routerNavigate, paths.settings);
 		};
 		const handleClickStart = () => {
 			sm.transition(State.prepare);
@@ -142,6 +140,7 @@ export default defineComponent({
 		return {
 			i18n,
 
+			paths,
 			sm,
 			remained,
 

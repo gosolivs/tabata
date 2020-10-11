@@ -35,16 +35,15 @@
 			</div>
 
 			<div class="settings__controls">
-				<base-button @click="handleSave">{{
-					i18n.t("actions.close")
-				}}</base-button>
+				<base-button is="a" :href="paths.home">
+					{{ i18n.t("actions.close") }}
+				</base-button>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { routerNavigate } from "@storeon/router";
 import { computed, defineComponent } from "vue";
 
 import BaseButton from "@/components/base-button/base-button.vue";
@@ -87,17 +86,15 @@ export default defineComponent({
 			set: (value: number) => store.dispatch(Actions.changeCycles, value),
 		});
 
-		const handleSave = () => store.dispatch(routerNavigate, paths.home);
-
 		return {
 			i18n,
+
+			paths,
 
 			prepare,
 			rest,
 			work,
 			cycles,
-
-			handleSave,
 		};
 	},
 });
