@@ -1,7 +1,8 @@
 <template>
 	<div id="app">
 		<home-page v-if="hasVisibleHomePage" />
-		<settings-page v-if="hasVisibleSettingsPage" />
+		<settings-page v-else-if="hasVisibleSettingsPage" />
+		<not-found-page v-else />
 	</div>
 </template>
 
@@ -10,6 +11,7 @@ import { routerChanged, routerKey, RouterRecordState } from "@storeon/router";
 import { defineComponent, computed, ref } from "vue";
 
 import HomePage from "@/pages/home/index.vue";
+import NotFoundPage from "@/pages/not-found/index.vue";
 import SettingsPage from "@/pages/settings/index.vue";
 import { pages } from "@/router/pages";
 import { State as RouterLocalStore } from "@/router/router";
@@ -29,6 +31,7 @@ export default defineComponent({
 	components: {
 		HomePage,
 		SettingsPage,
+		NotFoundPage,
 	},
 
 	setup() {
