@@ -36,13 +36,13 @@
 </template>
 
 <script lang="ts">
+import { routerNavigate } from "@storeon/router";
 import { defineComponent, reactive, computed } from "vue";
-import { useRouter } from "vue-router";
 
 import BaseButton from "@/components/base-button/base-button.vue";
 import { TimerStateMachine, State } from "@/libs/state-machine/timer/timer";
 import { useI18n } from "@/locales/locales";
-import { pages } from "@/router/pages";
+import { paths } from "@/router/pages";
 import { useStore } from "@/store/store";
 
 import HomeTimeInfo from "./components/home-time-info/home-time-info.vue";
@@ -60,7 +60,6 @@ export default defineComponent({
 	},
 
 	setup() {
-		const router = useRouter();
 		const i18n = useI18n();
 		const store = useStore();
 		const { prepare, rest, work, cycles } = store.state;
@@ -119,7 +118,7 @@ export default defineComponent({
 
 		const handleClickSettings = () => {
 			sm.transition(State.init);
-			router.push({ name: pages.settings });
+			store.dispatch(routerNavigate, paths.settings);
 		};
 		const handleClickStart = () => {
 			sm.transition(State.prepare);

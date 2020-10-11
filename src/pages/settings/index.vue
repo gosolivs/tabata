@@ -44,14 +44,14 @@
 </template>
 
 <script lang="ts">
+import { routerNavigate } from "@storeon/router";
 import { computed, defineComponent } from "vue";
-import { useRouter } from "vue-router";
 
 import BaseButton from "@/components/base-button/base-button.vue";
 import BaseField from "@/components/base-field/base-field.vue";
 import BaseInputNumber from "@/components/base-input-number/base-input-number.vue";
 import { useI18n } from "@/locales/locales";
-import { pages } from "@/router/pages";
+import { paths } from "@/router/pages";
 import { Actions, useStore } from "@/store/store";
 
 export default defineComponent({
@@ -65,7 +65,6 @@ export default defineComponent({
 
 	setup() {
 		const store = useStore();
-		const router = useRouter();
 		const i18n = useI18n();
 
 		const prepare = computed({
@@ -88,7 +87,7 @@ export default defineComponent({
 			set: (value: number) => store.dispatch(Actions.changeCycles, value),
 		});
 
-		const handleSave = () => router.push({ name: pages.home });
+		const handleSave = () => store.dispatch(routerNavigate, paths.home);
 
 		return {
 			i18n,

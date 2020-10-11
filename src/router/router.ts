@@ -1,24 +1,12 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter } from "@storeon/router";
 
-import Home from "@/pages/home/index.vue";
-import Settings from "@/pages/settings/index.vue";
+import { pages, paths } from "./pages";
 
-import { pages } from "./pages";
+export type State = {
+	page: string;
+};
 
-export const router = createRouter({
-	history: createWebHistory(
-		process.env.NODE_ENV === "production" ? "/tabata/" : "/",
-	),
-	routes: [
-		{
-			path: "/",
-			name: pages.home,
-			component: Home,
-		},
-		{
-			path: "/settings/",
-			name: pages.settings,
-			component: Settings,
-		},
-	],
-});
+export const router = createRouter<State>([
+	[paths.home, () => ({ page: pages.home })],
+	[paths.settings, () => ({ page: pages.settings })],
+]);

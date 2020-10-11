@@ -1,7 +1,9 @@
+import { RouterEvents, RouterState } from "@storeon/router";
 import { createStoreon, StoreonStore } from "storeon";
 import { reactive } from "vue";
 
 import { getStorage, setStorage } from "@/libs/storage/storage";
+import { router, State as RouterLocalState } from "@/router/router";
 
 import { checkRange } from "./helpers";
 import { Range, State, Events, Actions } from "./types";
@@ -67,17 +69,23 @@ const root = (store: StoreonStore<State, Events>) => {
 	});
 };
 
-const store = createStoreon<State, Events>([root]);
+const store = createStoreon<
+	State & RouterState<RouterLocalState>,
+	Events & RouterEvents<RouterLocalState>
+>([root, router]);
 
 const reactiveState = reactive(store.get());
 store.on("@changed", (_, changed) => {
 	Object.keys(changed).forEach((key) => {
-		if (!["prepare", "rest", "work", "cycles"].includes(key)) {
+		if (
+			key !== "prepare" &&
+			key !== "rest" &&
+			key !== "work" &&
+			key !== "cycles"
+		) {
 			return;
 		}
 
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
 		reactiveState[key] = changed[key];
 	});
 });
@@ -85,6 +93,7 @@ store.on("@changed", (_, changed) => {
 export function useStore() {
 	return {
 		dispatch: store.dispatch,
+		on: store.on,
 		get state() {
 			return reactiveState;
 		},
