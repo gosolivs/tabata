@@ -12,23 +12,23 @@
 
 			<div v-if="!hasStartTimer" class="home__controls">
 				<base-button @click="handleClickSettings">
-					{{ $t("actions.settings") }}
+					{{ i18n.t("actions.settings") }}
 				</base-button>
 				<base-button @click="handleClickStart">
-					{{ $t("actions.start") }}
+					{{ i18n.t("actions.start") }}
 				</base-button>
 			</div>
 
 			<div v-if="hasStartTimer" class="home__controls">
 				<base-button v-if="hasPauseTimer" @click="handleClickTogglePause">
-					{{ $t("actions.resume") }}
+					{{ i18n.t("actions.resume") }}
 				</base-button>
 				<base-button v-else is-gray @click="handleClickTogglePause">
-					{{ $t("actions.pause") }}
+					{{ i18n.t("actions.pause") }}
 				</base-button>
 
 				<base-button @click="handleClickStop">
-					{{ $t("actions.stop") }}
+					{{ i18n.t("actions.stop") }}
 				</base-button>
 			</div>
 		</div>
@@ -41,6 +41,7 @@ import { useRouter } from "vue-router";
 
 import BaseButton from "@/components/base-button/base-button.vue";
 import { TimerStateMachine, State } from "@/libs/state-machine/timer/timer";
+import { useI18n } from "@/locales/locales";
 import { pages } from "@/router/pages";
 import { useStore } from "@/store/store";
 
@@ -60,6 +61,7 @@ export default defineComponent({
 
 	setup() {
 		const router = useRouter();
+		const i18n = useI18n();
 		const store = useStore();
 		const { prepare, rest, work, cycles } = store.state;
 
@@ -139,6 +141,8 @@ export default defineComponent({
 		};
 
 		return {
+			i18n,
+
 			sm,
 			remained,
 

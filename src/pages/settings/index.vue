@@ -1,41 +1,43 @@
 <template>
 	<div class="settings">
 		<div class="settings__wrap">
-			<h1 class="settings__title">{{ $t("settings.title") }}</h1>
+			<h1 class="settings__title">{{ i18n.t("settings.title") }}</h1>
 
 			<div class="settings__main">
 				<base-field class="settings__field">
 					<template #label>
-						{{ $t("states.prepare")
-						}}<span class="settings__note">, {{ $t("time_unit") }}</span>
+						{{ i18n.t("states.prepare")
+						}}<span class="settings__note">, {{ i18n.t("time_unit") }}</span>
 					</template>
 					<base-input-number v-model="prepare" />
 				</base-field>
 
 				<base-field class="settings__field">
 					<template #label>
-						{{ $t("states.rest")
-						}}<span class="settings__note">, {{ $t("time_unit") }}</span>
+						{{ i18n.t("states.rest")
+						}}<span class="settings__note">, {{ i18n.t("time_unit") }}</span>
 					</template>
 					<base-input-number v-model="rest" />
 				</base-field>
 
 				<base-field class="settings__field">
 					<template #label>
-						{{ $t("states.work")
-						}}<span class="settings__note">, {{ $t("time_unit") }}</span>
+						{{ i18n.t("states.work")
+						}}<span class="settings__note">, {{ i18n.t("time_unit") }}</span>
 					</template>
 					<base-input-number v-model="work" />
 				</base-field>
 
 				<base-field class="settings__field">
-					<template #label>{{ $t("settings.cycles") }}</template>
+					<template #label>{{ i18n.t("settings.cycles") }}</template>
 					<base-input-number v-model="cycles" />
 				</base-field>
 			</div>
 
 			<div class="settings__controls">
-				<base-button @click="handleSave">{{ $t("actions.close") }}</base-button>
+				<base-button @click="handleSave">{{
+					i18n.t("actions.close")
+				}}</base-button>
 			</div>
 		</div>
 	</div>
@@ -48,6 +50,7 @@ import { useRouter } from "vue-router";
 import BaseButton from "@/components/base-button/base-button.vue";
 import BaseField from "@/components/base-field/base-field.vue";
 import BaseInputNumber from "@/components/base-input-number/base-input-number.vue";
+import { useI18n } from "@/locales/locales";
 import { pages } from "@/router/pages";
 import { Actions, useStore } from "@/store/store";
 
@@ -63,6 +66,7 @@ export default defineComponent({
 	setup() {
 		const store = useStore();
 		const router = useRouter();
+		const i18n = useI18n();
 
 		const prepare = computed({
 			get: () => store.state.prepare,
@@ -87,10 +91,13 @@ export default defineComponent({
 		const handleSave = () => router.push({ name: pages.home });
 
 		return {
+			i18n,
+
 			prepare,
 			rest,
 			work,
 			cycles,
+
 			handleSave,
 		};
 	},

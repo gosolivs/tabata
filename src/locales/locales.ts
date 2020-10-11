@@ -1,5 +1,3 @@
-import { Plugin } from "vue";
-
 import { flattenDictionary } from "./helpers";
 import ru from "./ru.json";
 
@@ -11,9 +9,3 @@ const translator = (key: string): string =>
 export const useI18n = () => ({
 	t: translator,
 });
-
-export const localesVuePlugin: Plugin = {
-	install: (app) => {
-		app.config.globalProperties.$t = translator;
-	},
-};
