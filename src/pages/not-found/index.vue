@@ -1,8 +1,8 @@
 <template>
 	<div class="not-found">
 		<div class="not-found__wrap">
-			<h1 class="not-found__header">{{ i18n.t("notFound.title") }}</h1>
-			<a href="/">{{ i18n.t("notFound.goToHome") }}</a>
+			<h1 class="not-found__header">{{ i18n.t("not-found.title") }}</h1>
+			<a href="/">{{ i18n.t("not-found.go-to-home") }}</a>
 		</div>
 	</div>
 </template>
