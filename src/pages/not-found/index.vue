@@ -2,7 +2,7 @@
 	<div class="not-found">
 		<div class="not-found__wrap">
 			<h1 class="not-found__header">{{ i18n.t("not-found.title") }}</h1>
-			<a href="/">{{ i18n.t("not-found.go-to-home") }}</a>
+			<a :href="paths.home">{{ i18n.t("not-found.go-to-home") }}</a>
 		</div>
 	</div>
 </template>
@@ -11,12 +11,13 @@
 import { defineComponent } from "vue";
 
 import { useI18n } from "@/locales/locales";
+import { paths } from "@/router/pages";
 
 export default defineComponent({
 	setup() {
 		const i18n = useI18n();
 
-		return { i18n };
+		return { i18n, paths };
 	},
 });
 </script>
