@@ -1,4 +1,5 @@
-import { checkRange, Range } from "./helpers";
+import { checkRange } from "./helpers";
+import { Range } from "./types";
 
 describe("store helpers checkRange", () => {
 	const range: Range = { min: 0, max: 60 };
